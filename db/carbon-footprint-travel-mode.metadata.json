@@ -1,0 +1,49 @@
+{
+  "chart": {
+    "title": "Carbon footprint of travel per kilometer",
+    "subtitle": "The carbon footprint of travel is measured in grams of [carbon dioxide-equivalents](#dod:carbondioxideequivalents) per passenger kilometer. This includes the impact of increased warming from aviation emissions at altitude.",
+    "note": "Official conversion factors used in UK reporting. These factors will vary across countries depending on energy mix, transport technologies, and occupancy of public transport. Data for aviation is based on economy class.",
+    "citation": "UK Government, Department for Energy Security and Net Zero (2022)",
+    "originalChartUrl": "https://ourworldindata.org/grapher/carbon-footprint-travel-mode?v=1&csvType=full&useColumnShortNames=false",
+    "selection": [
+      "Diesel car",
+      "Short-haul flight",
+      "Medium electric vehicle (UK electricity)",
+      "Bus (local London)",
+      "Bus (average)",
+      "Coach (bus)",
+      "Plug-in hybrid",
+      "Ferry (foot passenger)",
+      "Eurostar (to Paris)",
+      "Tram",
+      "London Underground",
+      "Light rail and tram",
+      "Motorbike",
+      "Electric car",
+      "National rail",
+      "Petrol car",
+      "Domestic flight",
+      "Long-haul flight"
+    ]
+  },
+  "columns": {
+    "Transport emissions per kilometer travelled": {
+      "titleShort": "Transport emissions per kilometer travelled",
+      "titleLong": "Transport emissions per kilometer travelled",
+      "descriptionKey": [],
+      "shortUnit": "kg",
+      "unit": "kgCO2e",
+      "timespan": "2022-2022",
+      "type": "Numeric",
+      "conversionFactor": 1000,
+      "owidVariableId": 810786,
+      "shortName": "transport_emissions_factor",
+      "lastUpdated": "2023-12-06",
+      "citationShort": "UK Government, Department for Energy Security and Net Zero (2022) – processed by Our World in Data",
+      "citationLong": "UK Government, Department for Energy Security and Net Zero (2022) – processed by Our World in Data. “Transport emissions per kilometer travelled” [dataset]. UK Government, Department for Energy Security and Net Zero, “Greenhouse gas reporting: conversion factors 2022” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/810786.metadata.json"
+    }
+  },
+  "dateDownloaded": "2025-05-06",
+  "activeFilters": {}
+}
