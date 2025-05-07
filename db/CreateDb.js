@@ -63,4 +63,11 @@ await db.query(`
     );
 `);
 
+  import {upload} from 'pg-upload';
+  await upload (
+    db,
+    'db/carbon_footprint.csv',
+    'copy carbon_footprint (transport_method, code, year, transport_emissions_pr_km) from stdin with csv header' 
+  );
+
   
