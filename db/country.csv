@@ -1,4 +1,4 @@
-code, Country
+country_id, country, gdp_id, carbon_cap_id
 1,Africa
 2,Algeria
 3,Angola
