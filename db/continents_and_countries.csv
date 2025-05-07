@@ -1,150 +1,150 @@
 code, Country
-,Africa
-,Algeria
-,Angola
-,Benin
-,Botswana
-,Burkina Faso
-,Burundi
-,Cameroon
-,Cape Verde
-,Central African Republic
-,Chad
-,Comoros
-,Congo (Democratic Republic)
-,Congo (Republic)
-,Djibouti
-,Egypt
-,Equatorial Guinea
-,Eritrea
-,Eswatini
-,Ethiopia
-,Gabon
-,Gambia
-,Ghana
-,Guinea
-,Guinea-Bissau
-,Ivory Coast
-,Kenya
-,Lesotho
-,Liberia
-,Libya
-,Madagascar
-,Malawi
-,Mali
-,Mauritania
-,Mauritius
-,Morocco
-,Mozambique
-,Namibia
-,Niger
-,Nigeria
-,Rwanda
-,Asia
-,Afghanistan
-,Armenia
-,Azerbaijan
-,Bahrain
-,Bangladesh
-,Bhutan
-,Brunei
-,Cambodia
-,China
-,Cyprus
-,Georgia
-,India
-,Indonesia
-,Iran
-,Iraq
-,Israel
-,Japan
-,Jordan
-,Kazakhstan
-,Kuwait
-,Kyrgyzstan
-,Laos
-,Lebanon
-,Malaysia
-,Maldives
-,Mongolia
-,Myanmar
-,Nepal
-,North Korea
-,Oman
-,Pakistan
-,Philippines
-,Qatar
-,Australia/Oceania
-,Australia
-,Fiji
-,Kiribati
-,Marshall Islands
-,Micronesia
-,Nauru
-,New Zealand
-,Palau
-,Papua New Guinea
-,Europe
-,Albania
-,Andorra
-,Austria
-,Belarus
-,Belgium
-,Bosnia and Herzegovina
-,Bulgaria
-,Croatia
-,Czech Republic
-,Denmark
-,Estonia
-,Finland
-,France
-,Germany
-,Greece
-,Hungary
-,Iceland
-,Ireland
-,Italy
-,Latvia
-,Liechtenstein
-,Lithuania
-,Luxembourg
-,Malta
-,Moldova
-,Monaco
-,Montenegro
-,Netherlands
-,North Macedonia
-,Norway
-,Poland
-,Portugal
-,Romania
-,Russia
-,North America
-,Bahamas
-,Barbados
-,Belize
-,Canada
-,Costa Rica
-,Cuba
-,Dominica
-,Dominican Republic
-,El Salvador
-,Grenada
-,Guatemala
-,Haiti
-,Honduras
-,Jamaica
-,Mexico
-,Nicaragua
-,Panama
-,Saint Kitts and Nevis
-,South America
-,Argentina
-,Bolivia
-,Brazil
-,Chile
-,Colombia
-,Ecuador
-,Guyana
-,Paraguay
-,Peru
+1,Africa
+2,Algeria
+3,Angola
+4,Benin
+5,Botswana
+6,Burkina Faso
+7,Burundi
+8,Cameroon
+9,Cape Verde
+10,Central African Republic
+11,Chad
+12,Comoros
+13,Congo (Democratic Republic)
+14,Congo (Republic)
+15,Djibouti
+16,Egypt
+17,Equatorial Guinea
+18,Eritrea
+19,Eswatini
+20,Ethiopia
+21,Gabon
+22,Gambia
+23,Ghana
+24,Guinea
+25,Guinea-Bissau
+26,Ivory Coast
+27,Kenya
+28,Lesotho
+29,Liberia
+30,Libya
+31,Madagascar
+32,Malawi
+33,Mali
+34,Mauritania
+35,Mauritius
+36,Morocco
+37,Mozambique
+38,Namibia
+39,Niger
+40,Nigeria
+41,Rwanda
+42,Asia
+43,Afghanistan
+44,Armenia
+45,Azerbaijan
+46,Bahrain
+47,Bangladesh
+48,Bhutan
+49,Brunei
+50,Cambodia
+51,China
+52,Cyprus
+53,Georgia
+54,India
+55,Indonesia
+56,Iran
+57,Iraq
+58,Israel
+59,Japan
+60,Jordan
+61,Kazakhstan
+62,Kuwait
+63,Kyrgyzstan
+64,Laos
+65,Lebanon
+66,Malaysia
+67,Maldives
+68,Mongolia
+69,Myanmar
+70,Nepal
+71,North Korea
+72,Oman
+73,Pakistan
+74,Philippines
+75,Qatar
+76,Australia/Oceania
+77,Australia
+78,Fiji
+79,Kiribati
+80,Marshall Islands
+81,Micronesia
+82,Nauru
+83,New Zealand
+84,Palau
+85,Papua New Guinea
+86,Europe
+87,Albania
+88,Andorra
+89,Austria
+90,Belarus
+91,Belgium
+92,Bosnia and Herzegovina
+93,Bulgaria
+94,Croatia
+95,Czech Republic
+96,Denmark
+97,Estonia
+98,Finland
+99,France
+100,Germany
+101,Greece
+102,Hungary
+103,Iceland
+104,Ireland
+105,Italy
+106,Latvia
+107,Liechtenstein
+108,Lithuania
+109,Luxembourg
+110,Malta
+111,Moldova
+112,Monaco
+113,Montenegro
+114,Netherlands
+115,North Macedonia
+116,Norway
+117,Poland
+118,Portugal
+119,Romania
+120,Russia
+121,North America
+122,Bahamas
+123,Barbados
+124,Belize
+125,Canada
+126,Costa Rica
+127,Cuba
+128,Dominica
+129,Dominican Republic
+130,El Salvador
+131,Grenada
+132,Guatemala
+133,Haiti
+134,Honduras
+135,Jamaica
+136,Mexico
+137,Nicaragua
+138,Panama
+139,Saint Kitts and Nevis
+140,South America
+141,Argentina
+142,Bolivia
+143,Brazil
+144,Chile
+145,Colombia
+146,Ecuador
+147,Guyana
+148,Paraguay
+149,Peru
