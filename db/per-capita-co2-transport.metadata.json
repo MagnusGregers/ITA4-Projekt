@@ -1,0 +1,38 @@
+{
+  "chart": {
+    "title": "Per capita CO₂ emissions from transport",
+    "subtitle": "Emissions are measured in tonnes per person. International aviation and shipping emissions are not included.",
+    "citation": "Climate Watch (2024); Population based on various sources (2024)",
+    "originalChartUrl": "https://ourworldindata.org/grapher/per-capita-co2-transport?v=1&csvType=full&useColumnShortNames=false",
+    "selection": [
+      "Netherlands",
+      "United States",
+      "United Kingdom",
+      "Canada",
+      "Australia",
+      "Norway",
+      "India",
+      "China"
+    ]
+  },
+  "columns": {
+    "Per capita carbon dioxide emissions from transport": {
+      "titleShort": "Per capita carbon dioxide emissions from transport",
+      "titleLong": "Per capita carbon dioxide emissions from transport",
+      "descriptionShort": "Emissions are measured in tonnes per person.",
+      "shortUnit": "t/person",
+      "unit": "tonnes per person",
+      "timespan": "1990-2021",
+      "type": "Numeric",
+      "owidVariableId": 998813,
+      "shortName": "transport_co2_emissions_per_capita",
+      "lastUpdated": "2024-11-21",
+      "nextUpdate": "2025-11-21",
+      "citationShort": "Climate Watch (2024); Population based on various sources (2024) – with major processing by Our World in Data",
+      "citationLong": "Climate Watch (2024); Population based on various sources (2024) – with major processing by Our World in Data. “Per capita carbon dioxide emissions from transport” [dataset]. Climate Watch, “Greenhouse gas emissions by sector”; Various sources, “Population” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/998813.metadata.json"
+    }
+  },
+  "dateDownloaded": "2025-05-07",
+  "activeFilters": {}
+}
