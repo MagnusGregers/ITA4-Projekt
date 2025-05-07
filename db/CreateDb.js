@@ -44,7 +44,7 @@ await db.query(`
 await db.query(`
     drop table if exists carbon_capital;
     create table carbon_capital (
-    carbon_footprint_id integer unique not null primary key,
+    carbon_cap_id integer unique not null primary key,
     country_id integer references country (country_id),
     country text,
     code integer,
@@ -59,7 +59,7 @@ await db.query(`
     create table country (
     country_id integer unique not null primary key,
     gdp_id integer references gdp (gdp_id),
-    carbon_footprint_id integer references carbon_footprint (carbon_footprint_id)
+    carbon_cap_id integer references carbon_cap_id (carbon_cap_id)
     );
 `);
 
@@ -70,4 +70,4 @@ await db.query(`
     'copy carbon_footprint (transport_method, code, year, transport_emissions_pr_km) from stdin with csv header' 
   );
 
-  
+
