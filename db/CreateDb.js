@@ -13,7 +13,7 @@ const db = new pg.Pool({
 });
 const dbResult = await db.query('select now()');
 
-//Creating tables with our data with our Primary and Foreign Keys
+//Creating tables with our data with Primary and Foreign Keys
 
 //Carbon Footprint Table
 await db.query(`
