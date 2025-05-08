@@ -14,6 +14,12 @@ const db = new pg.Pool({
 const dbResult = await db.query('select now()');
 
 //Creating tables with our data with Primary and Foreign Keys
+//in each create table a number of contraints was added
+//not null = ensures the coloum cannot store null values
+//unique = prevents duplicare entries
+// auto increment = generates a unique incrementing integer for every row (skips manual input)
+
+//drop table if exists, is to drop old tables and only keep active or excisting tables
 
 //Carbon Footprint Table
 await db.query(`
