@@ -37,8 +37,8 @@ await db.query(`
 await db.query(`
     drop table if exists gdp;
     create table gdp (
-       gdp_id integer unique not null primary key,
-       carbon_cap_id references carbon_capital (carbon_cap_id)
+       gdp_id integer autoincrement unique not null primary key,
+       country_id integer references country (country_id),
        country text,
        code integer,
        year date,
@@ -48,10 +48,10 @@ await db.query(`
 
 //Carbon Capital Table
 await db.query(`
-    drop table if exists carbon_capital;
-    create table carbon_capital (
-        carbon_cap_id integer unique not null primary key,
-        gdp_id integer references gdp (gdp_id),
+    drop table if exists carbon_cap;
+    create table carbon_cap (
+        carbon_cap_id integer autoincrement unique not null primary key,
+        country_id integer references country (country_id),
         country text,
         code integer,
         year integer,
@@ -63,13 +63,14 @@ await db.query(`
 await db.query(`
     drop table if exists country;
     create table country (
-    country_id integer unique not null primary key,
-    country text,
+    country_id integer autoincrement unique not null primary key,
     gdp_id integer references gdp (gdp_id),
-    carbon_cap_id integer references carbon_cap_id (carbon_cap_id)
+    carbon_cap_id integer references carbon_cap_id (carbon_cap_id),
+    country text
     );
 `);
 
+//Carbon Footprint Table
   import {upload} from 'pg-upload';
   await upload (
     db,
@@ -77,23 +78,26 @@ await db.query(`
     'copy carbon_footprint (transport_method, code, year, transport_emissions_pr_km) from stdin with csv header' 
   );
 
-  import {upload} from 'pg-upload';
-  await upload (
-    db,
-    'db/carbon_cap.csv',
-    'copy carbon_cap (carbon_cap_id, gdp_id, country, code, year, pr_capita_co2_emissions) from stdin with csv header' 
-  );
-
+  //GDP Table
   import {upload} from 'pg-upload';
   await upload (
     db,
     'db/gdp.csv',
-    'copy gdp (gdp_id, carbon_cap_id, country, code, year, gdp_pr_capital) from stdin with csv header' 
+    'copy gdp (gdp_id, country_id, country, code, year, gdp_pr_capital) from stdin with csv header' 
   );
 
+  //Carbon Capital Table
+  import {upload} from 'pg-upload';
+  await upload (
+    db,
+    'db/carbon_cap.csv',
+    'copy carbon_cap (carbon_cap_id, country_id, country, code, year, pr_capita_co2_emissions) from stdin with csv header' 
+  );
+
+//Country Table
   import {upload} from 'pg-upload';
   await upload (
     db,
     'db/country.csv',
-    'copy country (country_id, country, gdp_id, carbon_cap_id) from stdin with csv header' 
+    'copy country (country_id, gdp_id, carbon_cap_id, country) from stdin with csv header' 
   );
