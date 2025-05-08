@@ -1,4 +1,4 @@
-Country,Code,Year,Per capita carbon dioxide emissions from transport
+country,code,year,pr_capita_co2_emissions
 Afghanistan,AFG,1990,0.08052719
 Afghanistan,AFG,1991,0.07598765
 Afghanistan,AFG,1992,0.05572735
