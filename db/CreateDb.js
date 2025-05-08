@@ -64,6 +64,7 @@ await db.query(`
     drop table if exists country;
     create table country (
     country_id integer unique not null primary key,
+    country text,
     gdp_id integer references gdp (gdp_id),
     carbon_cap_id integer references carbon_cap_id (carbon_cap_id)
     );
@@ -79,7 +80,20 @@ await db.query(`
   import {upload} from 'pg-upload';
   await upload (
     db,
-    'db/.csv',
-    'copy  () from stdin with csv header' 
+    'db/carbon_cap.csv',
+    'copy carbon_cap (carbon_cap_id, gdp_id, country, code, year, pr_capita_co2_emissions) from stdin with csv header' 
   );
 
+  import {upload} from 'pg-upload';
+  await upload (
+    db,
+    'db/gdp.csv',
+    'copy gdp (gdp_id, carbon_cap_id, country, code, year, gdp_pr_capital) from stdin with csv header' 
+  );
+
+  import {upload} from 'pg-upload';
+  await upload (
+    db,
+    'db/country.csv',
+    'copy country (country_id, country, gdp_id, carbon_cap_id) from stdin with csv header' 
+  );
