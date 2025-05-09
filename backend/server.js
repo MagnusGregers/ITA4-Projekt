@@ -3,9 +3,17 @@ import express from 'express';
 const port = 3000;
 const server = express();
 
-server.get('/api/ita4', onGetJson1);
+server.get('/api/ita4', onGetita4);
 server.listen(port);
 
-function onGetJson1(request, response) {
+function onGetita4(request, response) {
     response.json('hello, web world!');
+}
+function onEachRequest(request, response, next) {
+    console.log(new Date(), request.method, request.url);
+    next();
+}
+
+function onServerReady() {
+    console.log('Webserver running on port', port);
 }
