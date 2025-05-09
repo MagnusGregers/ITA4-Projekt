@@ -1,5 +1,6 @@
 import pg from 'pg';
 import dotenv from 'dotenv';
+import {upload} from 'pg-upload'
 
 dotenv.config();
 console.log('Connecting to database', process.env.PG_DATABASE);
@@ -72,6 +73,7 @@ await db.query(`
 
 //Carbon Footprint Table
   import {upload} from 'pg-upload';
+
   await upload (
     db,
     'db/carbon_footprint.csv',
@@ -79,7 +81,6 @@ await db.query(`
   );
 
   //GDP Table
-  import {upload} from 'pg-upload';
   await upload (
     db,
     'db/gdp.csv',
@@ -87,7 +88,6 @@ await db.query(`
   );
 
   //Carbon Capital Table
-  import {upload} from 'pg-upload';
   await upload (
     db,
     'db/carbon_cap.csv',
@@ -95,7 +95,6 @@ await db.query(`
   );
 
 //Country Table
-  import {upload} from 'pg-upload';
   await upload (
     db,
     'db/country.csv',
