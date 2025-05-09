@@ -1,5 +1,6 @@
 import pg from 'pg';
 import dotenv from 'dotenv';
+import {upload} from 'pg-upload'
 
 dotenv.config();
 console.log('Connecting to database', process.env.PG_DATABASE);
@@ -21,17 +22,19 @@ const dbResult = await db.query('select now()');
 
 //drop table if exists, is to drop old tables and only keep active or excisting tables
 
-//Carbon Footprint Table
+
+//Country Table
+//gdp_id integer references gdp (gdp_id),
+//carbon_cap_id integer references carbon_cap (carbon_cap_id),
 await db.query(`
-    drop table if exists carbon_footprint;
-    create table carbon_footprint (
-        transport_method text,
-        code integer,
-        year date,
-        transport_emissions_pr_km integer
+    drop table if exists country;
+    create table country (
+    country_id SERIAL unique not null primary key,
+    gdp_id integer references gdp (gdp_id),
+    carbon_cap_id integer references carbon_cap (carbon_cap_id),
+    country text
     );
 `);
-
 
 //GDP Table
 await db.query(`
@@ -59,7 +62,7 @@ await db.query(`
     );
 `);
 
-//Country Table
+//Carbon Footprint Table
 await db.query(`
     drop table if exists country;
     create table country (
@@ -70,16 +73,15 @@ await db.query(`
     );
 `);
 
-//Carbon Footprint Table
-  import {upload} from 'pg-upload';
+//Country Table
   await upload (
     db,
-    'db/carbon_footprint.csv',
-    'copy carbon_footprint (transport_method, code, year, transport_emissions_pr_km) from stdin with csv header' 
+    'db/country.csv',
+    'copy country (country_id, gdp_id, carbon_cap_id, country) from stdin with csv header' 
   );
+  await db.end();
 
   //GDP Table
-  import {upload} from 'pg-upload';
   await upload (
     db,
     'db/gdp.csv',
@@ -87,18 +89,16 @@ await db.query(`
   );
 
   //Carbon Capital Table
-  import {upload} from 'pg-upload';
   await upload (
     db,
     'db/carbon_cap.csv',
     'copy carbon_cap (carbon_cap_id, country_id, country, code, year, pr_capita_co2_emissions) from stdin with csv header' 
   );
 
-//Country Table
-  import {upload} from 'pg-upload';
+
+  //Carbon Footprint Table
   await upload (
     db,
-    'db/country.csv',
-    'copy country (country_id, gdp_id, carbon_cap_id, country) from stdin with csv header' 
+    'db/carbon_footprint.csv',
+    'copy carbon_footprint (transport_method, code, year, transport_emissions_pr_km) from stdin with csv header' 
   );
-  await db.end();

@@ -2,10 +2,14 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "dev": "nodemon backend/server.js"
+        "dev": "nodemon backend/server.js",
+        "CreateDb": "node db/CreateDb.js"
     },
     "dependencies": {
+        "dotenv": "^16.5.0",
         "express": "4.21.2",
-        "nodemon": "3.1.9"
+        "nodemon": "3.1.9",
+        "pg": "^8.15.6",
+        "pg-upload": "^0.0.5"
     }
 }
