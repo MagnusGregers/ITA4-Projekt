@@ -30,8 +30,8 @@ await db.query(`
     drop table if exists country;
     create table country (
     country_id SERIAL unique not null primary key,
-    gdp_id serial,
-    carbon_cap_id serial,
+    gdp_id integer references gdp (gdp_id),
+    carbon_cap_id integer references carbon_cap (carbon_cap_id),
     country text
     );
 `);
