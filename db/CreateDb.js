@@ -71,13 +71,12 @@ await db.query(`
     );
 `);
 
-//Country Table
+//Carbon Footprint Table
   await upload (
     db,
-    'db/country.csv',
-    'copy country (country_id, gdp_id, carbon_cap_id, country) from stdin with csv header' 
+    'db/carbon_footprint.csv',
+    'copy carbon_footprint (transport_method, code, year, transport_emissions_pr_km) from stdin with csv header' 
   );
-  await db.end();
 
   //GDP Table
   await upload (
@@ -93,9 +92,10 @@ await db.query(`
     'copy carbon_cap (carbon_cap_id, country_id, country, code, year, pr_capita_co2_emissions) from stdin with csv header' 
   );
 
-//Carbon Footprint Table
+//Country Table
   await upload (
     db,
-    'db/carbon_footprint.csv',
-    'copy carbon_footprint (transport_method, code, year, transport_emissions_pr_km) from stdin with csv header' 
+    'db/country.csv',
+    'copy country (country_id, gdp_id, carbon_cap_id, country) from stdin with csv header' 
   );
+  await db.end();
