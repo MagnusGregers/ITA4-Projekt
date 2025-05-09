@@ -72,8 +72,6 @@ await db.query(`
 `);
 
 //Carbon Footprint Table
-  import {upload} from 'pg-upload';
-
   await upload (
     db,
     'db/carbon_footprint.csv',
