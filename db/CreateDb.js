@@ -22,19 +22,17 @@ const dbResult = await db.query('select now()');
 
 //drop table if exists, is to drop old tables and only keep active or excisting tables
 
-
-//Country Table
-//gdp_id integer references gdp (gdp_id),
-//carbon_cap_id integer references carbon_cap (carbon_cap_id),
+//Carbon Footprint Table
 await db.query(`
-    drop table if exists country cascade;
-    create table country (
-    country_id SERIAL unique not null primary key,
-    gdp_id integer references gdp (gdp_id),
-    carbon_cap_id integer references carbon_cap (carbon_cap_id),
-    country text
+    drop table if exists carbon_footprint;
+    create table carbon_footprint (
+        transport_method text,
+        code integer,
+        year date,
+        transport_emissions_pr_km integer
     );
 `);
+
 
 //GDP Table
 await db.query(`
@@ -62,24 +60,23 @@ await db.query(`
     );
 `);
 
-//Carbon Footprint Table
+//Country Table
 await db.query(`
-    drop table if exists carbon_footprint;
-    create table carbon_footprint (
-        transport_method text,
-        code integer,
-        year date,
-        transport_emissions_pr_km integer
+    drop table if exists country;
+    create table country (
+    country_id SERIAL unique not null primary key,
+    gdp_id integer references gdp (gdp_id),
+    carbon_cap_id integer references carbon_cap (carbon_cap_id),
+    country text
     );
 `);
 
-//Country Table
+//Carbon Footprint Table
   await upload (
     db,
-    'db/country.csv',
-    'copy country (country_id, gdp_id, carbon_cap_id, country) from stdin with csv header' 
+    'db/carbon_footprint.csv',
+    'copy carbon_footprint (transport_method, code, year, transport_emissions_pr_km) from stdin with csv header' 
   );
-  await db.end();
 
   //GDP Table
   await upload (
@@ -95,10 +92,10 @@ await db.query(`
     'copy carbon_cap (carbon_cap_id, country_id, country, code, year, pr_capita_co2_emissions) from stdin with csv header' 
   );
 
-
-  //Carbon Footprint Table
+//Country Table
   await upload (
     db,
-    'db/carbon_footprint.csv',
-    'copy carbon_footprint (transport_method, code, year, transport_emissions_pr_km) from stdin with csv header' 
+    'db/country.csv',
+    'copy country (country_id, gdp_id, carbon_cap_id, country) from stdin with csv header' 
   );
+  await db.end();
