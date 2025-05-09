@@ -38,7 +38,7 @@ await db.query(`
 await db.query(`
     drop table if exists gdp;
     create table gdp (
-       gdp_id integer serial unique not null primary key,
+       gdp_id integer SERIAL unique not null primary key,
        country_id integer references country (country_id),
        country text,
        code integer,
@@ -51,7 +51,7 @@ await db.query(`
 await db.query(`
     drop table if exists carbon_cap;
     create table carbon_cap (
-        carbon_cap_id integer serial unique not null primary key,
+        carbon_cap_id integer SERIAL unique not null primary key,
         country_id integer references country (country_id),
         country text,
         code integer,
@@ -64,7 +64,7 @@ await db.query(`
 await db.query(`
     drop table if exists country;
     create table country (
-    country_id integer serial unique not null primary key,
+    country_id integer SERIAL unique not null primary key,
     gdp_id integer references gdp (gdp_id),
     carbon_cap_id integer references carbon_cap_id (carbon_cap_id),
     country text
