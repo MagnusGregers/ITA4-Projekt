@@ -3,6 +3,8 @@ import express from 'express';
 const port = 3000;
 const server = express();
 
+server.use(express.static('frontend'));
+server.use(onEachRequest)
 server.get('/api/ita4', onGetita4);
 server.listen(port);
 
