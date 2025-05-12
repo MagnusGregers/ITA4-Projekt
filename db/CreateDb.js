@@ -82,7 +82,7 @@ await upload (
 await upload (
   db,
   'db/country.csv',
-  'copy country (country_id, gdp_id, carbon_cap_id, country) from stdin with csv header' 
+  'copy country (country_id, country) from stdin with csv header' 
 );
 await db.end();
 
