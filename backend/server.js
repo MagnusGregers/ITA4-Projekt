@@ -6,7 +6,7 @@ const server = express();
 server.use(express.static('frontend'));
 server.use(onEachRequest)
 server.get('/api/ita4', onGetita4);
-server.listen(port);
+server.listen(port, onServerReady);
 
 function onGetita4(request, response) {
     response.json('hello, web world!');
