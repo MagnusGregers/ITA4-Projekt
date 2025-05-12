@@ -15,7 +15,7 @@
 
 // - dropdown button for each year
 
-//-------------animation (plaine)-------------//
+//-------------animation (plane)-------------//
 
 // - plaine model
 
