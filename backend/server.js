@@ -1,21 +1,57 @@
 import express from 'express';
+import pg from 'pg';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const port = 3000;
 const server = express();
 
+// Opret databaseforbindelse
+const db = new pg.Pool({
+    host: process.env.PG_HOST,
+    port: parseInt(process.env.PG_PORT),
+    database: process.env.PG_DATABASE,
+    user: process.env.PG_USER,
+    password: process.env.PG_PASSWORD,
+    ssl: { rejectUnauthorized: false },
+});
+
+// Server statiske filer fra frontend-mappen
 server.use(express.static('frontend'));
-server.use(onEachRequest)
+server.use(onEachRequest);
+
+// Opsæt API-endpoint
 server.get('/api/ita4', onGetita4);
 server.listen(port, onServerReady);
 
-function onGetita4(request, response) {
-    response.json('hello, web world!');
+// Funktion til at hente data fra carbon_cap
+async function onGetita4(request, response) {
+    try {
+        // Test databaseforbindelsen
+        console.log('Connecting to database', process.env.PG_DATABASE);
+        
+        // Udfør forespørgslen
+        const result = await db.query('SELECT * FROM emissions_2021');
+        
+        // Log resultatet
+        console.log(result.rows);
+        
+        // Returner data til klienten
+        response.json(result.rows);
+    } catch (error) {
+        console.error('Database query failed', error);
+        response.status(500).json({ error: 'Database query failed' });
+    }
 }
+
+// Logger hver indkommende forespørgsel
 function onEachRequest(request, response, next) {
     console.log(new Date(), request.method, request.url);
     next();
 }
 
+// Når serveren er klar
 function onServerReady() {
     console.log('Webserver running on port', port);
 }
