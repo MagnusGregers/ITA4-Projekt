@@ -16,13 +16,13 @@
 // - dropdown button for each year
 
 //-------------animation (plane)-------------//
-// Starts by making different const to call back to
+// Starts by making different const to call back to.
 const svgWidth = window.innerWidth;
 const cloudGroup = d3.select("#cloudGroup");
 const planeGroup = d3.select("#planeGroup");
 const plane = d3.select("#plane");
 
-// here we make the drawing of the clouds
+// here we make the drawing of the clouds.
 function drawCloud(x, y, scale) {
   const cloud = cloudGroup.append("g")
     .attr("transform", `translate(${x}, ${y}) scale(${scale})`);
@@ -34,7 +34,7 @@ function drawCloud(x, y, scale) {
   animateCloud(cloud, x, y, scale);
 }
 
-// here we animate the clouds
+// here we animate the clouds.
 function animateCloud(cloud, startX, y, scale) {
   cloud
     .transition()
@@ -51,14 +51,14 @@ function animateCloud(cloud, startX, y, scale) {
     });
 }
 
-// cloud-generator
+// cloud-generator.
 setInterval(() => {
   const y = 40 + Math.random() * 60;
   const scale = 0.6 + Math.random() * 0.6;
   drawCloud(0, y, scale);
 }, 2000);
 
-// here we animate the plane
+// here we animate the plane.
 function animatePlane() {
   plane
     .attr("x", -600)
@@ -70,11 +70,11 @@ function animatePlane() {
 }
 animatePlane();
 
-// Scroll effect 
+// Scroll effect. 
 window.addEventListener("scroll", () => {
   const scrollY = window.scrollY;
 
-  // updates the position of the clouds and plane based by the scroll effect
+  // updates the position of the clouds and plane based by the scroll effect.
   const offset = scrollY * 0.3;
   cloudGroup.attr("transform", `translate(0, ${offset})`);
   planeGroup.attr("transform", `translate(0, ${offset})`);
