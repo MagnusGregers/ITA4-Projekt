@@ -22,7 +22,7 @@ const dataset_carbon_cap = [
 
 let dataset_carbon_cap = [];
 
-fetch('/api/ita4')
+fetch('/api/top20')
   .then(response => response.json())
   .then(data => {
     dataset_carbon_cap = data.map(d => [
