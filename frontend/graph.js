@@ -5,16 +5,17 @@ const padding =10;
 
 //the dataset is set up with value, continent, country
 const dataset_carbon_cap = [
-      [0.987654, 27, "2023-10-30 08:22:14"],
-  [0.456789, 15, "2023-10-30 09:45:22"],
-  [0.654321, 31, "2023-10-30 10:11:05"],
-  [0.888888, 63, "2023-10-30 12:05:10"],
-  [0.754123, 42, "2023-10-30 14:30:00"],
-  [0.182739, 87, "2023-10-30 15:15:30"],
-  [0.111111, 66, "2023-10-30 16:59:03"],
-  [0.56789, 74, "2023-10-30 18:10:45"],
-  [0.123456, 99, "2023-10-30 20:40:55"],
-  [0.333333, 53, "2023-10-30 22:55:30"],
+[]    
+[0.987654, 27, "2023-10-30 08:22:14"],
+[0.456789, 15, "2023-10-30 09:45:22"],
+[0.654321, 31, "2023-10-30 10:11:05"],
+[0.888888, 63, "2023-10-30 12:05:10"],
+[0.754123, 42, "2023-10-30 14:30:00"],
+[0.182739, 87, "2023-10-30 15:15:30"],
+[0.111111, 66, "2023-10-30 16:59:03"],
+[0.56789, 74, "2023-10-30 18:10:45"],
+[0.123456, 99, "2023-10-30 20:40:55"],
+[0.333333, 53, "2023-10-30 22:55:30"],
 ];
 const dataset_gdp = [];
 
@@ -126,12 +127,12 @@ function createAxisY(yScale) {
   return d3.axisLeft().scale(yScale).ticks(5);
 }
 
-function createAxisX(xScale, isFastest) {
+function createAxisX(xScale, isCountry) {
   return (
     d3
+    //isCountry desides which value is chosen
       .axisBottom()
       .scale(xScale)
-      //Her fortæller vi hvad der skal skrives på aksen, isFastest bestemmer om det skal være måletid eller måledato
       .tickFormat(function (d) {
         if (isFastest) {
           return dataset[d][0];
@@ -154,7 +155,7 @@ function addAxes() {
     .attr("id", "yAxis")
     .call(yAxis);
 
-  //X-aksen formateres, så den viser sine labels korrekt
+  //to insure the lable sits correct
   formatAxisX();
 }
 
@@ -162,7 +163,6 @@ function formatAxisX() {
   svg
     .select("#xAxis")
     .call(xAxis)
-    //Her fjernes tickmarks fra x-aksen - det synes jeg ser pænere ud
     .call(xAxis.tickSize(0))
     .selectAll("text")
     .attr("transform", "translate(-10,5)rotate(-45)")
@@ -172,52 +172,30 @@ function formatAxisX() {
 function animateData(data, isFastest) {
   setUp(data, isFastest);
   formatAxisX();
-  // select alle 'rect'.
   svg
     .selectAll("rect")
     .data(data, function (d) {
-      // Vælg key til hvert dataelement
       return d[2];
     })
-    //start en animation
+ 
+    //starting the animation
     .transition()
-    //Lad den vare 2000 ms
     .duration(2000)
-    /**
-     * Dette skal være slutresultatet: flyt søjlerne til de nye positioner
-     * 'width', 'height' og 'color' er de samme som før,
-     * så dem behøver vi ikke at tage med i vores 'transition'
-     * Men i praksis kan man sagtens animere flere ting på én gang, hvis man vil.
-     * I dette tilfælde skal altså kun 'x' ændres.
-     * */
+
     .attr("x", function (d, i) {
       return xScale(i) + padding;
     });
-
-  //her opdateres så x-aksen
 }
 
 function sortData(by) {
-  /**
-   * I array-objektet i JS er der indbygget en metoder som hedder 'sort'.
-   * Den tager en callback-funktion som parameter.
-   * I denne callback-funktion skal der returneres et tal, som er enten positivt, negativt eller 0.
-   * Hvis tallet er positivt, så bytter 'sort' metoden om på de to elementer i arrayet.
-   * Hvis tallet er negativt eller 0, så lader 'sort' metoden dem være som de er.
-   * På den måde bliver elementerne i arrayet sorteret.
-   */
+
   if (by === "sortByValue") {
     dataset.sort(function (a, b) {
       return b[1] - a[1];
     });
-  } else if (by === "sortByDate") {
+  } else if (by === "sortByContinent") {
     dataset.sort(function (a, b) {
-      /**
-       * I JS er der indbygget et objekt som hedder 'Date'.
-       * Den kan bruges til at lave en dato ud fra en tekststreng.
-       * Derfor giver vi det andet element i hvert indre array til 'Date' objektet.
-       * JS kan sammenligne Date-objekter ved at trække dem fra hinanden.
-       */
+
       return new Date(a[2]) - new Date(b[2]);
     });
   } else {
