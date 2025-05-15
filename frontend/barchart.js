@@ -34,8 +34,6 @@ fetch('/api/ita4')
 
     InitializeGraph(dataset_carbon_cap, true);  // sæt true hvis x-aksen skal vise country
   })
-  .catch(error => console.error('Fejl:', error));
-
 
 //const dataset_gdp = [];
 
