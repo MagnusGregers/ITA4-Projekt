@@ -4,7 +4,7 @@ const h = 250;
 const padding =10;
 const axisPadding = 20;
 
-//the dataset is set up with value, continent, country
+//the dataset is set up with emissions pr. country from the most resent year 2021
 const dataset_carbon_cap = [ 
 [0.987654, 27, "2023-10-30 08:22:14"],
 [0.456789, 15, "2023-10-30 09:45:22"],

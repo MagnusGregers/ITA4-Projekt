@@ -1,0 +1,41 @@
+/* Grundlæggende styling */
+body {
+    background-color: #297045;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Titel styling */
+h1, h2 {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Knapper */
+button {
+    background-color: #485696;
+    
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+
+button:hover {
+    background-color: #80ced7;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+    background-color: #485696;
+    transform: translateY(0) scale(1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);}
