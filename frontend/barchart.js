@@ -5,6 +5,7 @@ const padding =10;
 const axisPadding = 20;
 
 //the dataset is set up with emissions pr. country from the most resent year 2021
+/*
 const dataset_carbon_cap = [ 
 [0.987654, 27, "2023-10-30 08:22:14"],
 [0.456789, 15, "2023-10-30 09:45:22"],
@@ -17,6 +18,25 @@ const dataset_carbon_cap = [
 [0.123456, 99, "2023-10-30 20:40:55"],
 [0.333333, 53, "2023-10-30 22:55:30"],
 ];
+*/
+
+let dataset_carbon_cap = [];
+
+fetch('/api/ita4')
+  .then(response => response.json())
+  .then(data => {
+    dataset_carbon_cap = data.map(d => [
+      parseFloat(d.pr_capita_co2_emissions),  // emission som tal
+      parseInt(d.area_km2),                     // areal som heltal
+      d.country                                // land som tekst
+    ]);
+    console.log(dataset_carbon_cap);
+
+    InitializeGraph(dataset_carbon_cap, true);  // sæt true hvis x-aksen skal vise country
+  })
+  .catch(error => console.error('Fejl:', error));
+
+
 //const dataset_gdp = [];
 
 

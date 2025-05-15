@@ -32,7 +32,7 @@ async function onGetita4(request, response) {
         console.log('Connecting to database', process.env.PG_DATABASE);
         
         // Udfør forespørgslen
-        const result = await db.query('SELECT * FROM emissions_2021');
+        const result = await db.query('SELECT * FROM top_20_emissions_with_area');
         
         // Log resultatet
         console.log(result.rows);
