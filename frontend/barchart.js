@@ -32,7 +32,7 @@ let yAxis = null;
 InitializeGraph(dataset_carbon_cap, false);
 
 //sorting buttons
-d3.selectAll("#sortByValue, #sortByContinent, #sortByCountry").on(
+d3.selectAll("#sortByemission, #sortByContinent, #sortByCountry").on(
   "click",
   function (e) {
 //tracks witch button is pressed
@@ -187,7 +187,7 @@ function animateData(data, isCountry) {
 
 function sortData(by) {
 
-  if (by === "sortByValue") {
+  if (by === "sortByemission") {
     dataset_carbon_cap.sort(function (a, b) {
       return b[1] - a[1];
     });
