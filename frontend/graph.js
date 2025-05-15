@@ -2,10 +2,10 @@
 const w = 500;
 const h = 250;
 const padding =10;
+const axisPadding = 20;
 
 //the dataset is set up with value, continent, country
-const dataset_carbon_cap = [
-[]    
+const dataset_carbon_cap = [ 
 [0.987654, 27, "2023-10-30 08:22:14"],
 [0.456789, 15, "2023-10-30 09:45:22"],
 [0.654321, 31, "2023-10-30 10:11:05"],
@@ -17,20 +17,19 @@ const dataset_carbon_cap = [
 [0.123456, 99, "2023-10-30 20:40:55"],
 [0.333333, 53, "2023-10-30 22:55:30"],
 ];
-const dataset_gdp = [];
+//const dataset_gdp = [];
 
 
 //adding svg elements to the body
 const svg = d3.select("body").append("svg").attr("width", w).attr("height", h);
 
-let yscale = null;
-let xscale = null;
-
-let xaxis = null;
-let yaxis = null;
+let yScale = null;
+let xScale = null;
+let xAxis = null;
+let yAxis = null;
 
 //shows the graph when the webserver loads
-Infinity(dataset_carbon_cap, false);
+InitializeGraph(dataset_carbon_cap, false);
 
 //sorting buttons
 d3.selectAll("#sortByValue, #sortByContinent, #sortByCountry").on(
@@ -45,14 +44,14 @@ if (id === "sortByCountry") {
 }
 //sorting the data, when done the soring is logged
 sortData(id);
- console.log("Sorted data by " + id + " : ", dataset);
+ console.log("Sorted data by " + id + " : ", dataset_carbon_cap);
 
  //sorting animation
- animateData(dataset, isCountry);
+ animateData(dataset_carbon_cap, isCountry);
   }
 );
 
-function Infinity(dataset_carbon_cap, isCountry) {
+function InitializeGraph(dataset_carbon_cap, isCountry) {
 //setting the dinamic values and makeing the standard chart
 setUp(dataset_carbon_cap, isCountry);
 createDefaultChart(dataset_carbon_cap);
@@ -61,10 +60,9 @@ addAxes ();
 }
 
 function setUp (dataset_carbon_cap, isCountry) {
-  yScale = createScaleY(dataset);
-  xScale = createScaleX(dataset);
-  
-  xAxis = createAxisX(xScale, isFastest);
+  yScale = createScaleY(dataset_carbon_cap);
+  xScale = createScaleX(dataset_carbon_cap);
+  xAxis = createAxisX(xScale, isCountry);
   yAxis = createAxisY(yScale);
 }
 
@@ -79,14 +77,14 @@ svg
 .enter()
 .append("rect")
 .attr("x", function (d, i) {
-    return xscale (i) + padding;
+    return xScale (i) + padding;
 })
 .attr("y", function (d) {
       return yScale(d[1]);
     })
     .attr(
       "width",
-      w / dataset.length - 2 * padding - (2 * axisPadding) / dataset.length
+      w / dataset_carbon_cap.length - 2 * padding - (2 * axisPadding) / dataset_carbon_cap.length
     )
     .attr("height", function (d) {
       console.log("height: " + (yScale(d[1]) - axisPadding));
@@ -97,25 +95,25 @@ svg
     });
 }
 
-function createScaleX(dataset) {
+function createScaleX(dataset_carbon_cap) {
   return (
     d3
     .scaleBand()
       .range([padding + axisPadding, w - padding - axisPadding])
       .domain(
-              dataset.map(function (d, i) {
+              dataset_carbon_cap.map(function (d, i) {
 
           return i;
         })
       )
   );
 }
-function createScaleY(dataset) {
+function createScaleY(dataset_carbon_cap) {
   return d3
     .scaleLinear()
     .domain([
       0,
-      d3.max(dataset, function (d) {
+      d3.max(dataset_carbon_cap, function (d) {
         return d[1];
       }),
     ])
@@ -134,10 +132,10 @@ function createAxisX(xScale, isCountry) {
       .axisBottom()
       .scale(xScale)
       .tickFormat(function (d) {
-        if (isFastest) {
-          return dataset[d][0];
+        if (isCountry) {
+          return dataset_carbon_cap[d][0];
         } else {
-          return dataset[d][2];
+          return dataset_carbon_cap[d][2];
         }
       })
   );
@@ -169,8 +167,8 @@ function formatAxisX() {
     .style("text-anchor", "end");
 }
 
-function animateData(data, isFastest) {
-  setUp(data, isFastest);
+function animateData(data, isCountry) {
+  setUp(data, isCountry);
   formatAxisX();
   svg
     .selectAll("rect")
@@ -190,17 +188,18 @@ function animateData(data, isFastest) {
 function sortData(by) {
 
   if (by === "sortByValue") {
-    dataset.sort(function (a, b) {
+    dataset_carbon_cap.sort(function (a, b) {
       return b[1] - a[1];
     });
   } else if (by === "sortByContinent") {
-    dataset.sort(function (a, b) {
+    dataset_carbon_cap.sort(function (a, b) {
 
       return new Date(a[2]) - new Date(b[2]);
     });
   } else {
-    dataset.sort(function (a, b) {
+    dataset_carbon_cap.sort(function (a, b) {
       return a[0] - b[0];
     });
   }
 }
+console.log("graph is loaded");
