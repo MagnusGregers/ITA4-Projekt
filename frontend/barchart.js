@@ -5,20 +5,6 @@ const padding =10;
 const axisPadding = 20;
 
 //the dataset is set up with emissions pr. country from the most resent year 2021
-/*
-const dataset_carbon_cap = [ 
-[0.987654, 27, "2023-10-30 08:22:14"],
-[0.456789, 15, "2023-10-30 09:45:22"],
-[0.654321, 31, "2023-10-30 10:11:05"],
-[0.888888, 63, "2023-10-30 12:05:10"],
-[0.754123, 42, "2023-10-30 14:30:00"],
-[0.182739, 87, "2023-10-30 15:15:30"],
-[0.111111, 66, "2023-10-30 16:59:03"],
-[0.56789, 74, "2023-10-30 18:10:45"],
-[0.123456, 99, "2023-10-30 20:40:55"],
-[0.333333, 53, "2023-10-30 22:55:30"],
-];
-*/
 
 let dataset_carbon_cap = [];
 
@@ -26,17 +12,14 @@ fetch('/api/top20')
   .then(response => response.json())
   .then(data => {
     dataset_carbon_cap = data.map(d => [
-      parseFloat(d.pr_capita_co2_emissions),  // emission som tal
-      parseInt(d.area_km2),                     // areal som heltal
-      d.country                                // land som tekst
+      parseFloat(d.pr_capita_co2_emissions),  // emission as numbers
+      parseInt(d.area_km2),                     // area as wholenumbers
+      d.country                                // Country as text
     ]);
     console.log(dataset_carbon_cap);
 
-    InitializeGraph(dataset_carbon_cap, true);  // sæt true hvis x-aksen skal vise country
+    InitializeGraph(dataset_carbon_cap, true);  // to show country on the x axis (true)
   })
-
-//const dataset_gdp = [];
-
 
 //adding svg elements to the body
 const svg = d3.select("body").append("svg").attr("width", w).attr("height", h);

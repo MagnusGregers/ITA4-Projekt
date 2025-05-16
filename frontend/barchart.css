@@ -1,4 +1,4 @@
-/* Grundlæggende styling */
+/* styling */
 body {
     background-color: #297045;
     color: white;
@@ -7,14 +7,14 @@ body {
     padding: 20px;
 }
 
-/* Titel styling */
+/* title  styling */
 h1, h2 {
     color: #ffffff;
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* Knapper */
+/* buttons */
 button {
     background-color: #485696;
     

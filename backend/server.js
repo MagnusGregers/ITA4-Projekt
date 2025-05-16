@@ -46,13 +46,14 @@ async function onGetTop20(request, response) {
     }
 }
 
+
 async function onGetGdp(request, response) {
     try {
         // Test databaseforbindelsen
         console.log('Connecting to database', process.env.PG_DATABASE);
         
         // Udfør forespørgslen
-        const result = await db.query('SELECT * FROM gdp');
+        const result = await db.query('SELECT * FROM top_20_gdp_with_area ');
         
         // Log resultatet
         console.log(result.rows);
