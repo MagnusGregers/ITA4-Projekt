@@ -6,3 +6,40 @@ body {
 h1 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
+
+div {
+    text-align: center;
+}
+
+.canvas {
+    position: relative;
+}
+.country {
+    fill: rgb(233, 140, 26);
+    color: rgb(227, 171, 104);
+    stroke:#297045;
+    
+  
+}
+.country:hover {
+    fill: rgb(243, 182, 112);
+    cursor: pointer;
+}
+
+.dataTool {
+  position: absolute;
+  background-color: white;
+  color: black;
+  padding: 8px;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  font-size: 14px;
+  z-index: 1000;
+}
+
+.hidden {
+  display: none;
+}
+
