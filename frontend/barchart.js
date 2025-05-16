@@ -2,7 +2,7 @@
 const w = 500;
 const h = 250;
 const padding =10;
-const axisPadding = 20;
+const axisPadding = 30;
 
 //the dataset is set up with emissions pr. country from the most resent year 2021
 
@@ -67,9 +67,22 @@ function setUp (dataset_carbon_cap, isCountry) {
   yAxis = createAxisY(yScale);
 }
 
+
+//defining the colors for the barchart
+const colors = ["#CCDBDC", "#80CED7", "#297045", "#63C7B2", "#485696"];
+
+function getColor(value, maxValue) {
+  const ratio = value / maxValue;
+  const index = Math.floor(ratio * (colors.length - 1));
+  return colors[index];
+}
+
 function createDefaultChart (dataset_carbon_cap) {
+  // finding the bigest value to add color
+const maxArea =d3.max(dataset_carbon_cap, d => d[1]);
+
 //now the barchat is build, enery coloum gets a unique key
-//this is done for d3 to reginize dem
+//this is done for d3 to reginize dem and bind the data to the bars
 svg
 .selectAll ("rect")
 .data(dataset_carbon_cap, function (d) {
@@ -91,9 +104,7 @@ svg
       console.log("height: " + (yScale(d[1]) - axisPadding));
       return h - padding - axisPadding - yScale(d[1]);
     })
-    .attr("fill", function (d) {
-      return "rgb(0, 0, " + (256 - d[1] * 2) + ")";
-    });
+    .attr("fill", d => getColor(d[1], maxArea));
 }
 
 function createScaleX(dataset_carbon_cap) {
