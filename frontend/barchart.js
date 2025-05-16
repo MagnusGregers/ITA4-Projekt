@@ -53,16 +53,18 @@ sortData(id);
 );
 
 function InitializeGraph(dataset_carbon_cap, isCountry) {
-//setting the dinamic values and makeing the standard chart
+//the function calls supfuctions -  this function is what creates the chart (scales, bars and axis)
 setUp(dataset_carbon_cap, isCountry);
 createDefaultChart(dataset_carbon_cap);
-//adding axes
+//adding axes with a <g> element
 addAxes ();
 }
 
 function setUp (dataset_carbon_cap, isCountry) {
+  //sets up the graph by creating a linear skala, that converts the values from the dataset tp the y-and x-positions
   yScale = createScaleY(dataset_carbon_cap);
   xScale = createScaleX(dataset_carbon_cap);
+  //making the actual lines 
   xAxis = createAxisX(xScale, isCountry);
   yAxis = createAxisY(yScale);
 }
@@ -71,6 +73,7 @@ function setUp (dataset_carbon_cap, isCountry) {
 //defining the colors for the barchart
 const colors = ["#CCDBDC", "#80CED7", "#297045", "#63C7B2", "#485696"];
 
+//for each bar the fucktion getcolor is udes to mach the color with a value (high numers = light colors) dark colors = high values.
 function getColor(value, maxValue) {
   const ratio = value / maxValue;
   const index = Math.floor(ratio * (colors.length - 1));
