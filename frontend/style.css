@@ -1,14 +1,6 @@
 body {
     background-color: #297045;
     color: white;
-}
-
-h1 {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-h4 {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 30px;
-    text-align: center;
+    height: 2000px;
+    margin: 0;
 }

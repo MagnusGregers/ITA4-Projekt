@@ -22,16 +22,9 @@ const dbResult = await db.query('select now()');
 
 //drop table if exists, is to drop old tables and only keep active or excisting tables
 
-/*await db.query(`
-  drop table if exists carbon_footprint;
-  drop table if exists country;
-  drop table if exists gdp;
-  drop table if exists carbon_cap;
-  `);
-  */
-
   await db.query(`
     drop table if exists carbon_cap;
+    drop table if exists gdp_temp;
     drop table if exists gdp;
     drop table if exists country;
     drop table if exists carbon_footprint;
@@ -57,8 +50,18 @@ await db.query(`
 
 //GDP Table
 await db.query(`
-    create table gdp (
+    create table gdp_temp (
        country text,
+       code text,
+       year numeric,
+       gdp_pr_capital numeric
+    );
+`);
+
+
+await db.query(`
+    create table gdp (
+       country_id integer references country not null,
        code text,
        year numeric,
        gdp_pr_capital numeric
@@ -68,12 +71,15 @@ await db.query(`
 //Carbon Capital Table
 await db.query(` 
     create table carbon_cap (
+        carbon_cap_id serial primary key,
+        country_id integer references country,
         country text,
         code text,
         year numeric,
         pr_capita_co2_emissions numeric
     );
 `);
+
 
 //Carbon Footprint Table
 await upload (
@@ -93,14 +99,25 @@ await upload (
   await upload (
     db,
     'db/gdp.csv',
-    'copy gdp (country, code, year, gdp_pr_capital) from stdin with csv header' 
+    'copy gdp_temp (country, code, year, gdp_pr_capital) from stdin with csv header' 
   );
 
+ await db.query (`
+  insert into gdp (country_id, code, year, gdp_pr_capital)
+  select (select country_id from country where country = g.country) as country_id, 
+          g.code,
+          g.year,
+          g.gdp_pr_capital
+  from gdp_temp as g
+  where exists (select country_id from country where country = g.country)
+  `)
+  
   //Carbon Capital Table
   await upload (
     db,
     'db/carbon_cap.csv',
     'copy carbon_cap (country, code, year, pr_capita_co2_emissions) from stdin with csv header' 
   );
+
 
 await db.end();
