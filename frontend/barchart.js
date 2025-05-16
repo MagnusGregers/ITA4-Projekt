@@ -110,34 +110,44 @@ svg
     .attr("fill", d => getColor(d[1], maxArea));
 }
 
+//making the xscale based on the data
 function createScaleX(dataset_carbon_cap) {
   return (
     d3
     .scaleBand()
+    //defining the area (range)
       .range([padding + axisPadding, w - padding - axisPadding])
+      //defining the domain as a index for each country
       .domain(
               dataset_carbon_cap.map(function (d, i) {
 
-          return i;
+          return i; //used to place the bars
         })
       )
   );
 }
+//same but with yscale based on the data
 function createScaleY(dataset_carbon_cap) {
   return d3
     .scaleLinear()
+    //the domain starts with 0 until max.
     .domain([
       0,
       d3.max(dataset_carbon_cap, function (d) {
         return d[1];
       }),
     ])
+    //the area for the yscale, from buttom (h) and to the top (0)
     .range([h - padding - axisPadding, padding + axisPadding])
-    .nice();
+    .nice(); //used to make the ticks more round
 }
 
+//makeing the yaxis and using the 
 function createAxisY(yScale) {
-  return d3.axisLeft().scale(yScale).ticks(5);
+  return d3
+.axisLeft()
+.scale(yScale)
+.ticks(5); //shows 5 "ticks" along the y-axis
 }
 
 function createAxisX(xScale, isCountry) {
@@ -147,61 +157,66 @@ function createAxisX(xScale, isCountry) {
       .axisBottom()
       .scale(xScale)
       .tickFormat(function (d) {
+        //when sorting by country (isCountry ==true), show name
         if (isCountry) {
-          return dataset_carbon_cap[d][0];
+          return dataset_carbon_cap[d][0]; // countrys
         } else {
-          return dataset_carbon_cap[d][2];
+          return dataset_carbon_cap[d][2]; //alternative value
         }
       })
   );
 }
 
+//adding axis to the svg element
 function addAxes() {
+  //xaxis
   svg
     .append("g")
     .attr("transform", "translate(0," + (h - padding - axisPadding) + ")")
     .attr("id", "xAxis");
 
+//yaxis
   svg
     .append("g")
     .attr("transform", "translate(" + (padding + axisPadding) + ",0)")
     .attr("id", "yAxis")
     .call(yAxis);
 
-  //to insure the lable sits correct
+  //to insure the lable sits correct (fx rotating lables)
   formatAxisX();
 }
 
 function formatAxisX() {
   svg
     .select("#xAxis")
-    .call(xAxis)
-    .call(xAxis.tickSize(0))
+    .call(xAxis) //updates the axis
+    .call(xAxis.tickSize(0)) //remove small "ticks" along the axis
     .selectAll("text")
-    .attr("transform", "translate(-10,5)rotate(-45)")
-    .style("text-anchor", "end");
+    .attr("transform", "translate(-10,5)rotate(-45)") //rotate the lables at 45deg
+    .style("text-anchor", "end"); //make the text rightsided (for better readability)
 }
 
+//amimate the changes in the data
 function animateData(data, isCountry) {
-  setUp(data, isCountry);
+  setUp(data, isCountry); // updating the scales and axis
   formatAxisX();
   svg
     .selectAll("rect")
     .data(data, function (d) {
-      return d[2];
+      return d[2]; // binds the data to the country
     })
  
     //starting the animation
     .transition()
     .duration(2000)
 
+    //updating the x-position for each bar
     .attr("x", function (d, i) {
       return xScale(i) + padding;
     });
 }
 
 function sortData(by) {
-
   if (by === "sortByemission") {
     dataset_carbon_cap.sort(function (a, b) {
       return b[1] - a[1];
