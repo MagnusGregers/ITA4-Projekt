@@ -8,7 +8,7 @@ const axisPadding = 30;
 
 let dataset_carbon_cap = [];
 
-fetch('/api/top20')
+fetch('/api/gdp')
   .then(response => response.json())
   .then(data => {
     dataset_carbon_cap = data.map(d => [
