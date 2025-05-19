@@ -33,7 +33,7 @@ function onGetita4(request, response) {
 
 async function onGetdbData(request, response) {
   try {
-    const result = await db.query('SELECT country_id, country FROM country order by country_id asc');
+    const result = await db.query('SELECT * FROM carbon_cap order by country asc');
     response.json(result.rows);
   } catch (err) {
     console.error('DB error:', err);

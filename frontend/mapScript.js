@@ -1,28 +1,19 @@
-
 console.log('script is running')
 
-//Two const's used for the map
+// Dimensions for map
 const width = 1000;
 const height = 800;
 
-//svg element that targets the canvas div
+// SVG element that targets canvas div
 const svg = d3.select('#canvas')
   .append('svg')
   .attr('width', width)
-  .attr('height', height) 
+  .attr('height', height)
   .style('border', '3px solid black')
   .style('border-radius', '25px');
-  
 
-//fun fact box group element 
-const fun_fact = svg.append('g')
-.attr('class', 'fun_fact')
-.attr('transform','translate(10, 10)');
-
-//Data display when hovering above country
+// Display for data when hovering above a country
 const dataBox = d3.select('#dataBox')
-  .append('dataBox')
-  .attr('class', 'dataBox')
   .style('position', 'absolute')
   .style('z-index', 1000)
   .style('background', 'white')
@@ -32,76 +23,66 @@ const dataBox = d3.select('#dataBox')
   .style('pointer-events', 'none')
   .style('font-family', 'sans-serif')
   .style('font-size', '14px')
-  .style('visibility', 'hidden');
+  .style('visibility', 'hidden')
+  .style('color', '#000');
 
+// Projection for drawing a Mercator map
+const projection = d3.geoMercator()
+  .scale(140)
+  .translate([width / 2, height / 1.3]);
 
-
-//fun fact box 
-fun_fact.append('rect')
-.attr('width', 300)
-.attr('height', 80)
-.style('fill', 'white')
-.style('stroke', '#ccc')
-.style('border', '1px solid black')
-.attr('rx', '10')
-.attr('ry','10');
-
-//fun fact box text
-fun_fact.append('text')
-.attr('x', '10')
-.attr('y', '20')
-.style('font-family', 'sans-serif')
-.style('font-size', '14px')
-.style('fill', '#333')
-.text('Insert fun fact here');  
-
-fun_fact.append('text')
-.attr('x', '10')
-.attr('y', '40')
-.style('font-family', 'sans-serif')
-.style('font-size', '14px')
-.style('fill', '#333')
-.text('Or here i dont care');
-
-//Projection used for the map itself
-const projection = d3.geoMercator().scale(140)
-.translate([width/ 2, height/ 1.3]); //Translates the map to fit the page
-
-//creates path that converts geoJSON to SVG strings
 const path = d3.geoPath(projection);
-
-//group element 'g', for the country paths
 const g = svg.append('g');
 
+let countryInfo = {}; // To hold API data keyed by country name
 
-//Logging data from our api
-d3.json('http://localhost:3000/api/dbData').then(countryData => {
-  console.log(countryData); 
+// Fixes names between the geojson and api data
+const nameCorrection = {
+  "United States of America": "United States",
   
-});
-//data on the world map from a CDN
-d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json')
-.then(data=> {
-  const countries = topojson.feature(data, data.objects.countries); //converts topojson to geojson
+};
 
-  g.selectAll('path').data(countries.features)
-    .enter()
-    .append('path')
-    .attr('class', 'country')
-    .attr('d', path);
-    
-// When creating your countries paths...
-d3.selectAll('path.country')
-  .on('mouseover', () => dataBox.style('visibility', 'visible'))
-  .on('mousemove', (event) => {
-    dataBox
-      .style('top', (event.pageY + 10) + 'px')
-      .style('left', (event.pageX + 10) + 'px')
-      .style('color', '#333')
-      .text('Land: Danmark');
-  })
-  .on('mouseout', () => dataBox.style('visibility', 'hidden'));
+d3.json('http://localhost:3000/api/dbData').then(dbData => {
+  dbData.forEach(entry => {
+    countryInfo[entry.country] = entry;
+  });
 
+  loadMap();
 });
 
-console.log('World map bbyyyy')
+function loadMap() {
+  d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json')
+    .then(worldData => {
+      const countries = topojson.feature(worldData, worldData.objects.countries);
+
+      g.selectAll('path')
+        .data(countries.features)
+        .enter()
+        .append('path')
+        .attr('class', 'country')
+        .attr('d', path)
+        .on('mouseover', (event, d) => {
+          const name = d.properties.name;
+          const lookupName = nameCorrection[name] || name;
+          const api = countryInfo[lookupName];
+          console.log(d.properties.name)
+
+          let dataBoxText = `<strong>Country:</strong> ${d.properties.name}`;
+          if (api) {
+            dataBoxText += `<br><strong>Year:</strong> ${api.year}`;
+            dataBoxText += `<br><strong>CO₂ per capita:</strong> ${api.pr_capita_co2_emissions}`;
+          } else {
+            dataBoxText += `<br><em>No data available</em>`;
+          }
+
+          dataBox
+            .style('top', (event.pageY + 10) + 'px')
+            .style('left', (event.pageX + 10) + 'px')
+            .style('visibility', 'visible')
+            .html(dataBoxText);
+        })
+        .on('mouseout', () => {
+          dataBox.style('visibility', 'hidden');
+        });
+    });
+}
