@@ -1,7 +1,7 @@
 //width, height, and padding for the graph. Padding ensures the axis does not overlap
-const w = 1000;
+const w = 700;
 const h = 500;
-const padding =5;
+const padding =2;
 const axisPadding = 60;
 
 //the dataset is set up with emissions pr. country from the most resent year 2021
