@@ -1,8 +1,8 @@
 //width, height, and padding for the graph. Padding ensures the axis does not overlap
-const w = 500;
-const h = 250;
-const padding =10;
-const axisPadding = 30;
+const w = 1000;
+const h = 500;
+const padding =5;
+const axisPadding = 60;
 
 //the dataset is set up with emissions pr. country from the most resent year 2021
 
@@ -30,7 +30,8 @@ let xAxis = null;
 let yAxis = null;
 
 //shows the graph when the webserver loads
-InitializeGraph(dataset_carbon_cap, false);
+InitializeGraph(dataset_carbon_cap, true);
+
 
 //sorting buttons
 d3.selectAll("#sortByemission, #sortByContinent, #sortByCountry").on(

@@ -6,19 +6,19 @@ const axisPadding = 30;
 
 //the dataset is set up with emissions pr. country from the most resent year 2021
 
-let dataset_carbon_cap = [];
+let dataset_gdp = [];
 
 fetch('/api/gdp')
   .then(response => response.json())
   .then(data => {
-    dataset_carbon_cap = data.map(d => [
-      parseFloat(d.pr_capita_co2_emissions),  // emission as numbers
+    dataset_gdp = data.map(d => [
+      parseFloat(d.gdp_pr_capital),  // gdp as ,numbers
       parseInt(d.area_km2),                     // area as wholenumbers
       d.country                                // Country as text
     ]);
-    console.log(dataset_carbon_cap);
+    console.log(dataset_gdp);
 
-    InitializeGraph(dataset_carbon_cap, true);  // to show country on the x axis (true)
+    InitializeGraph(dataset_gdp, true);  // to show country on the x axis (true)
   })
 
 //adding svg elements to the body
@@ -30,7 +30,7 @@ let xAxis = null;
 let yAxis = null;
 
 //shows the graph when the webserver loads
-InitializeGraph(dataset_carbon_cap, false);
+InitializeGraph(dataset_gdp, false);
 
 //sorting buttons
 d3.selectAll("#sortByemission, #sortByContinent, #sortByCountry").on(
@@ -39,33 +39,33 @@ d3.selectAll("#sortByemission, #sortByContinent, #sortByCountry").on(
 //tracks witch button is pressed
 let id = e.target.id;
 console.log(id);
-let isCountry = false;
+let isGdp = false;
 if (id === "sortByCountry") {
-    isCountry = true;
+    isGdp = true;
 }
 //sorting the data, when done the soring is logged
 sortData(id);
- console.log("Sorted data by " + id + " : ", dataset_carbon_cap);
+ console.log("Sorted data by " + id + " : ", dataset_gdp);
 
  //sorting animation
- animateData(dataset_carbon_cap, isCountry);
+ animateData(dataset_gdp, isGdp);
   }
 );
 
-function InitializeGraph(dataset_carbon_cap, isCountry) {
+function InitializeGraph(dataset_gdp, isGdp) {
 //the function calls supfuctions -  this function is what creates the chart (scales, bars and axis)
-setUp(dataset_carbon_cap, isCountry);
-createDefaultChart(dataset_carbon_cap);
+setUp(dataset_gdp, isGdp);
+createDefaultChart(dataset_gdp);
 //adding axes with a <g> element
 addAxes ();
 }
 
-function setUp (dataset_carbon_cap, isCountry) {
+function setUp (dataset_gdp, isGdp) {
   //sets up the graph by creating a linear skala, that converts the values from the dataset tp the y-and x-positions
-  yScale = createScaleY(dataset_carbon_cap);
-  xScale = createScaleX(dataset_carbon_cap);
+  yScale = createScaleY(dataset_gdp);
+  xScale = createScaleX(dataset_gdp);
   //making the actual lines 
-  xAxis = createAxisX(xScale, isCountry);
+  xAxis = createAxisX(xScale, isGdp);
   yAxis = createAxisY(yScale);
 }
 
@@ -80,15 +80,15 @@ function getColor(value, maxValue) {
   return colors[index];
 }
 
-function createDefaultChart (dataset_carbon_cap) {
+function createDefaultChart (dataset_gdp) {
   // finding the bigest value to add color
-const maxArea =d3.max(dataset_carbon_cap, d => d[1]);
+const maxArea =d3.max(dataset_gdp, d => d[1]);
 
 //now the barchat is build, enery coloum gets a unique key
 //this is done for d3 to reginize dem and bind the data to the bars
 svg
 .selectAll ("rect")
-.data(dataset_carbon_cap, function (d) {
+.data(dataset_gdp, function (d) {
     return d[2];
 })
 .enter()
@@ -101,7 +101,7 @@ svg
     })
     .attr(
       "width",
-      w / dataset_carbon_cap.length - 2 * padding - (2 * axisPadding) / dataset_carbon_cap.length
+      w / dataset_gdp.length - 2 * padding - (2 * axisPadding) / dataset_gdp.length
     )
     .attr("height", function (d) {
       console.log("height: " + (yScale(d[1]) - axisPadding));
@@ -111,7 +111,7 @@ svg
 }
 
 //making the xscale based on the data
-function createScaleX(dataset_carbon_cap) {
+function createScaleX(dataset_gdp) {
   return (
     d3
     .scaleBand()
@@ -119,7 +119,7 @@ function createScaleX(dataset_carbon_cap) {
       .range([padding + axisPadding, w - padding - axisPadding])
       //defining the domain as a index for each country
       .domain(
-              dataset_carbon_cap.map(function (d, i) {
+              dataset_gdp.map(function (d, i) {
 
           return i; //used to place the bars
         })
@@ -127,13 +127,13 @@ function createScaleX(dataset_carbon_cap) {
   );
 }
 //same but with yscale based on the data
-function createScaleY(dataset_carbon_cap) {
+function createScaleY(dataset_gdp) {
   return d3
     .scaleLinear()
     //the domain starts with 0 until max.
     .domain([
       0,
-      d3.max(dataset_carbon_cap, function (d) {
+      d3.max(dataset_gdp, function (d) {
         return d[1];
       }),
     ])
@@ -150,18 +150,18 @@ function createAxisY(yScale) {
 .ticks(5); //shows 5 "ticks" along the y-axis
 }
 
-function createAxisX(xScale, isCountry) {
+function createAxisX(xScale, isGdp) {
   return (
     d3
-    //isCountry desides which value is chosen
+    //isGdp desides which value is chosen
       .axisBottom()
       .scale(xScale)
       .tickFormat(function (d) {
-        //when sorting by country (isCountry ==true), show name
-        if (isCountry) {
-          return dataset_carbon_cap[d][0]; // countrys
+        //when sorting by country (isGdp ==true), show name
+        if (isGdp) {
+          return dataset_gdp[d][0]; // countrys
         } else {
-          return dataset_carbon_cap[d][2]; //alternative value
+          return dataset_gdp[d][2]; //alternative value
         }
       })
   );
@@ -197,8 +197,8 @@ function formatAxisX() {
 }
 
 //amimate the changes in the data
-function animateData(data, isCountry) {
-  setUp(data, isCountry); // updating the scales and axis
+function animateData(data, isGdp) {
+  setUp(data, isGdp); // updating the scales and axis
   formatAxisX();
   svg
     .selectAll("rect")
@@ -219,17 +219,17 @@ function animateData(data, isCountry) {
 function sortData(by) {
   if (by === "sortByemission") {
     //sort after emission (largest to smallest)
-    dataset_carbon_cap.sort(function (a, b) {
+    dataset_gdp.sort(function (a, b) {
       return b[1] - a[1];
     });
   } else if (by === "sortByContinent") {
-    dataset_carbon_cap.sort(function (a, b) {
+    dataset_gdp.sort(function (a, b) {
 
       return new Date(a[2]) - new Date(b[2]);
     });
   } else {
     //sorting after country alphabetically
-    dataset_carbon_cap.sort(function (a, b) {
+    dataset_gdp.sort(function (a, b) {
       return a[0] - b[0];
     });
   }
