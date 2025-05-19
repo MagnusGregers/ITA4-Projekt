@@ -7,6 +7,7 @@ const axisPadding = 60;
 //the dataset is set up with emissions pr. country from the most resent year 2021
 
 let dataset_carbon_cap = [];
+// data setup is [emission, area, country]
 
 fetch('/api/top20')
   .then(response => response.json())
@@ -84,6 +85,8 @@ function getColor(value, maxValue) {
 function createDefaultChart (dataset_carbon_cap) {
   // finding the bigest value to add color
 const maxArea =d3.max(dataset_carbon_cap, d => d[1]);
+//adding a mouseover function
+  const tooltip = d3.select("#tooltip");
 
 //now the barchat is build, enery coloum gets a unique key
 //this is done for d3 to reginize dem and bind the data to the bars
@@ -108,7 +111,30 @@ svg
       console.log("height: " + (yScale(d[1]) - axisPadding));
       return h - padding - axisPadding - yScale(d[1]);
     })
-    .attr("fill", d => getColor(d[1], maxArea));
+    .attr("fill", d => getColor(d[1], maxArea))
+    //adding a mouseover funktion
+  .on("mouseover", (event, d) => {
+    tooltip
+      .style("opacity", 1) //makeing it opacique
+      //shows the country name, emission and area for the country hovering over
+  .html(`
+      <strong>Country:</strong> ${d[2]}<br>
+      <strong>Emission:</strong> ${d[0]}<br>
+      <strong>Area:</strong> ${d[1].toLocaleString()} km²
+    `);
+})
+  //opdating the position while the mouse moves over the bar
+  .on("mousemove", (event) => {
+    tooltip
+    //sits the mouseover to the right and a little above of the mause 
+      .style("left", (event.pageX + 15) + "px")
+      .style("top", (event.pageY - 35) + "px");
+  })
+  //removes it when the mouse is no longer on the bar 
+  .on("mouseout", () => {
+    tooltip.style("opacity", 0);
+
+  });
 }
 
 //making the xscale based on the data
