@@ -1,6 +1,6 @@
 
 //----------------animation (waves)--------------//
-const svg = d3.select("#waveScene");
+const svgWave = d3.select("#waveScene");
 const width = window.innerWidth;
 const waveImgUrl = "https://cdn.pixabay.com/photo/2022/10/17/13/33/ocean-7527654_960_720.png";
 
@@ -8,7 +8,7 @@ const imgWidth = 300;
 const imgHeight = 200;
 const count = Math.ceil(width / imgWidth) + 3;
 const startX = -imgWidth * 2;
-const waveGroup = svg.append("g").attr("id", "waveGroup");
+const waveGroup = svgWave.append("g").attr("id", "waveGroup");
 
 for (let i = 0; i < count; i++) {
   waveGroup.append("image")
