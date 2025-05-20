@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="barchart.css">
     <title>Semester 1 projekt</title>
 </head>
 <body>
@@ -41,5 +42,22 @@
   </div>
 </section>
      <script src="script.js"></script> 
+<!--graph HTML-->
+
+    <section id="graph-section">
+        <h2>Graph</h2>
+        <p>Press the button to sort</p>
+        <div>
+            <button id="sortByemission">Emission</button>
+            <button id="sortByarea_km">Area km2</button>
+            <button id="sortByCountry">Country</button>
+        </div>
+    <div id="tooltip"></div>
+    </section>
+    
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="script.js"></script>
+    <script src="barchart.js"></script>
+   
 </body>
 </html> 

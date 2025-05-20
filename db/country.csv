@@ -1,5 +1,5 @@
-country_id, country, 
-1,Africa
+country_id, country, code  
+1,Africa, af
 2,Algeria
 3,Angola
 4,Benin
