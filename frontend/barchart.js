@@ -35,7 +35,7 @@ InitializeGraph(dataset_carbon_cap, true);
 
 
 //sorting buttons
-d3.selectAll("#sortByemission, #sortByContinent, #sortByCountry").on(
+d3.selectAll("#sortByemission, #sortByarea_km, #sortByCountry").on(
   "click",
   function (e) {
 //tracks witch button is pressed
@@ -73,7 +73,7 @@ function setUp (dataset_carbon_cap, isCountry) {
 
 
 //defining the colors for the barchart
-const colors = ["#CCDBDC", "#80CED7", "#297045", "#63C7B2", "#485696"];
+const colors = ["#CCDBDC", "#80CED7", "#004643", "#63C7B2", "#485696"];
 
 //for each bar the fucktion getcolor is udes to mach the color with a value (high numers = light colors) dark colors = high values.
 function getColor(value, maxValue) {
@@ -84,7 +84,7 @@ function getColor(value, maxValue) {
 
 function createDefaultChart (dataset_carbon_cap) {
   // finding the bigest value to add color
-const maxArea =d3.max(dataset_carbon_cap, d => d[1]);
+const maxArea =d3.max(dataset_carbon_cap, d => d[0]);
 //adding a mouseover function
   const tooltip = d3.select("#tooltip");
 
@@ -101,17 +101,17 @@ svg
     return xScale (i) + padding;
 })
 .attr("y", function (d) {
-      return yScale(d[1]);
+      return yScale(d[0]);
     })
     .attr(
       "width",
       w / dataset_carbon_cap.length - 2 * padding - (2 * axisPadding) / dataset_carbon_cap.length
     )
     .attr("height", function (d) {
-      console.log("height: " + (yScale(d[1]) - axisPadding));
-      return h - padding - axisPadding - yScale(d[1]);
+      console.log("height: " + (yScale(d[0]) - axisPadding));
+      return h - padding - axisPadding - yScale(d[0]);
     })
-    .attr("fill", d => getColor(d[1], maxArea))
+    .attr("fill", d => getColor(d[0], maxArea))
     //adding a mouseover funktion
   .on("mouseover", (event, d) => {
     tooltip
@@ -161,7 +161,7 @@ function createScaleY(dataset_carbon_cap) {
     .domain([
       0,
       d3.max(dataset_carbon_cap, function (d) {
-        return d[1];
+        return d[0];
       }),
     ])
     //the area for the yscale, from buttom (h) and to the top (0)
@@ -247,17 +247,20 @@ function sortData(by) {
   if (by === "sortByemission") {
     //sort after emission (largest to smallest)
     dataset_carbon_cap.sort(function (a, b) {
-      return b[1] - a[1];
+      return b[0] - a[0];
     });
-  } else if (by === "sortByContinent") {
+
+
+    //sorting by area_km
+  } else if (by === "sortByarea_km") {
     dataset_carbon_cap.sort(function (a, b) {
 
-      return new Date(a[2]) - new Date(b[2]);
+      return b[1] - a[1];
     });
   } else {
     //sorting after country alphabetically
     dataset_carbon_cap.sort(function (a, b) {
-      return a[0] - b[0];
+      return a[2].localeCompare(b[2]);
     });
   }
 }
