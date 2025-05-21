@@ -33,7 +33,7 @@ function onGetita4(request, response) {
 
 async function onGetdbData(request, response) {
   try {
-    const result = await db.query('SELECT * FROM carbon_cap order by country asc');
+    const result = await db.query('select country, year, round (pr_capita_co2_emissions, 2) as pr_capita_co2_emissions from carbon_cap');
     response.json(result.rows);
   } catch (err) {
     console.error('DB error:', err);
