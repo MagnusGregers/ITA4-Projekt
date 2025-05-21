@@ -8,3 +8,27 @@ body {
 h1 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
+div {
+    text-align: center;
+}
+
+.canvas {
+    position: relative;
+}
+.country {
+    fill: rgb(233, 140, 26);
+    color: rgb(227, 171, 104);
+    stroke:#297045;
+    
+  
+}
+.country:hover {
+    fill: rgb(243, 182, 112);
+    cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
