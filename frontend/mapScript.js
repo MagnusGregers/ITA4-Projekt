@@ -56,8 +56,8 @@ const nameCorrection = {
 };
 
 //Fetching data from our database through an API
-d3.json('http://localhost:3000/api/dbData').then(dbData => {
-  dbData.forEach(entry => {
+d3.json('http://localhost:3000/api/carbonCap').then(carbonCap => {
+  carbonCap.forEach(entry => {
     if (!countryInfo[entry.year]) {
       countryInfo[entry.year] = {};
     }

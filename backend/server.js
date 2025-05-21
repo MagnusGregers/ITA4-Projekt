@@ -30,6 +30,7 @@ server.use(onEachRequest);
 // Opsæt API-endpoint
 server.get('/api/top20', onGetTop20);
 server.get('/api/gdp', onGetGdp);
+server.get('/api/carbonCap', onGetCarbonCap);
 server.listen(port, onServerReady);
 
 // Funktion til at hente data fra carbon_cap
@@ -70,6 +71,16 @@ async function onGetGdp(request, response) {
         console.error('Database query failed', error);
         response.status(500).json({ error: 'Database query failed' });
     }
+}
+
+async function onGetCarbonCap(request, response) {
+  try {
+    const result = await db.query('select country, year, round (pr_capita_co2_emissions, 2) as pr_capita_co2_emissions from carbon_cap');
+    response.json(result.rows);
+  } catch (err) {
+    console.error('DB error:', err);
+    response.status(500).json({ error: 'Database error' });
+  }
 }
 
 // Logger hver indkommende forespørgsel
