@@ -1,14 +1,14 @@
 console.log('script is running')
 
 // Dimensions for map
-const width = 1000;
-const height = 800;
+const widthMap = 1000;
+const heightMap = 800;
 
 // SVG element that targets canvas div
-const svg = d3.select('#canvas')
+const svgMap = d3.select('#canvas')
   .append('svg')
-  .attr('width', width)
-  .attr('height', height)
+  .attr('width', widthMap)
+  .attr('height', heightMap)
   .style('border', '3px solid black')
   .style('border-radius', '25px');
 
@@ -29,11 +29,11 @@ const dataBox = d3.select('#dataBox')
 // Projection for drawing a Mercator map
 const projection = d3.geoMercator()
   .scale(140)
-  .translate([width / 2, height / 1.3]);
+  .translate([widthMap / 2, heightMap / 1.3]);
 
   //Defining path to draw the map with borders
 const path = d3.geoPath(projection);
-const g = svg.append('g');
+const g = svgMap.append('g');
 
 //Dropdown for selecting specific year to display data
 const select = d3.select('#selectYear');

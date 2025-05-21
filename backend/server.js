@@ -3,7 +3,7 @@ console.log('Script is running')
 import express from 'express';
 import pg from 'pg';
 import dotenv from 'dotenv';
-import express from 'express';
+
 
 dotenv.config();
 

@@ -11,12 +11,10 @@ h1 {
 
 
 
-div {
-    text-align: center;
-}
 
-.canvas {
-    position: relative;
+#canvas {
+  width: 80vw;
+  margin: 0 auto;
 }
 .country {
     fill: rgb(233, 140, 26);
