@@ -70,4 +70,4 @@ rect:hover {
   transition: opacity 0.2s ease;
   z-index: 1000;
   white-space: nowrap;
-  color: #000; /* Sørger for, at teksten ikke er hvid */}
+  color: #000; /* insures the texts is not white*/}

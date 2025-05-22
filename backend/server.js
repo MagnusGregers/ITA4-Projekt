@@ -10,7 +10,8 @@ dotenv.config();
 const port = 3000;
 const server = express();
 
-// Opret databaseforbindelse
+//creating databas connection with prostgres - 
+//to insure the database is not on git, an envioment fill is added with the actual port ect.
 const db = new pg.Pool({
     host: process.env.PG_HOST,
     port: parseInt(process.env.PG_PORT),
@@ -22,30 +23,29 @@ const db = new pg.Pool({
 
 const dbResult = await db.query('select now()');
 
-
-// Server statiske filer fra frontend-mappen
+//server files from the frontend folder
 server.use(express.static('frontend'));
 server.use(onEachRequest);
 
-// Opsæt API-endpoint
+// adding API-endpoint
 server.get('/api/top20', onGetTop20);
 server.get('/api/gdp', onGetGdp);
 server.get('/api/carbonCap', onGetCarbonCap);
 server.listen(port, onServerReady);
 
-// Funktion til at hente data fra carbon_cap
+//function to get data from a view based in carbon_cap in the database
 async function onGetTop20(request, response) {
     try {
-        // Test databaseforbindelsen
+        // testing the conection
         console.log('Connecting to database', process.env.PG_DATABASE);
         
-        // Udfør forespørgslen
+        // completing the query
         const result = await db.query('SELECT * FROM top_20_emissions_with_area');
         
-        // Log resultatet
+        // Logging the result
         console.log(result.rows);
         
-        // Returner data til klienten
+        // returning the data to the klient
         response.json(result.rows);
     } catch (error) {
         console.error('Database query failed', error);
@@ -56,16 +56,9 @@ async function onGetTop20(request, response) {
 
 async function onGetGdp(request, response) {
     try {
-        // Test databaseforbindelsen
         console.log('Connecting to database', process.env.PG_DATABASE);
-        
-        // Udfør forespørgslen
         const result = await db.query('SELECT * FROM top_20_gdp_with_area ');
-        
-        // Log resultatet
         console.log(result.rows);
-        
-        // Returner data til klienten
         response.json(result.rows);
     } catch (error) {
         console.error('Database query failed', error);
@@ -84,12 +77,13 @@ async function onGetCarbonCap(request, response) {
 }
 
 // Logger hver indkommende forespørgsel
+//logging every incomming query
 function onEachRequest(request, response, next) {
     console.log(new Date(), request.method, request.url);
     next();
 }
 
-// Når serveren er klar
+//when the server is ready
 function onServerReady() {
     console.log('Webserver running on port', port);
 }
