@@ -13,6 +13,7 @@
 <section id="waves" class="section visible">
     <svg id="waveScene" class="bottom-animation" width="100%" height="200"></svg>
 </section>
+<<<<<<< HEAD
 <!--graph --> 
     <section id="graph-section">
         <h2>Graph</h2>
@@ -47,6 +48,11 @@ Flying between countries and giant ships crossing oceans – those are counted e
 <!--animation-->
 <section id="sky" class="section visible">
     <h2 bold>Plane transition</h2>
+=======
+<!--graph -->          
+<section id="sky" class="section hidden">
+    <h2>Plane transition</h2>
+>>>>>>> d8a2c8459c9cccedf4f08585d35df229f0721541
         <svg id="skyScene" class="bottom-animation" width="100%" height="200">
             <g id="cloudGroup"></g>
             <g id="planeGroup">
@@ -57,19 +63,16 @@ Flying between countries and giant ships crossing oceans – those are counted e
         </svg>
 </section>
 <!--Worldmap-->
-<section id="worldmap" class="section visible">
-        <svg id="" class="bottom-animation" width="100%" height="200">
-        </svg>
-        <select id="selectYear"></select>
+    <select id="selectYear"></select>
     <div id="canvas"></div>
     <div id="dataBox"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script src="https://unpkg.com/topojson-client@3"></script>
     <script src="mapScript.js"></script>
-</section>
+
 <!--Memorygame-->
-<section id="memorygame" class="section visible">
+<section id="memorygame">
     <h4>Memory game</h4>
     <script src="memory-game.js" defer></script>
   <div id="memory-game" class="memory-game">
