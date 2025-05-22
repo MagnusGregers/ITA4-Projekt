@@ -14,7 +14,7 @@ h1, h2 {
 
 /* buttons */
 button {
-    background-color: #485696;
+    background-color: #C74E51;
     
     color: white;
     border: none;
@@ -28,13 +28,13 @@ button {
 
 
 button:hover {
-    background-color: #80ced7;
+    background-color: #F99256;
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 }
 
 button:active {
-    background-color: #485696;
+    background-color: #E59D2C;
     transform: translateY(0) scale(1);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);}
 
@@ -70,18 +70,19 @@ rect:hover {
   white-space: nowrap;
   color: #000; /* insures the texts is not white*/}
 
+  /* css for the textboxes*/
 .box-row {
   display: flex;
-  flex-wrap: wrap;            /* Så de hopper ned på mobil */
-  gap: 1rem;                  /* Mellemrum mellem bokse */
-  justify-content: center;   /* Centrer boksene horisontalt */
+  flex-wrap: wrap;            /* makeing then acceible on different screen sizes (jumps down) */
+  gap: 1rem;                  /* gap between the boxes */
+  justify-content: center;   /* Centering the boxes */
   margin-top: 2rem;
 }
 
 .text-box {
-  flex: 1 1 250px;            /* Vokser, men aldrig under 250px */
-  max-width: 300px;           /* Så de ikke bliver for brede */
-  background-color: #2a2a2a;
+  flex: 1 1 250px;            /* can grow with screensize but never under 250px */
+  max-width: 300px;           /* så they dont get to wide when moving with the screen*/
+  background-color: #E59D2C;
   color: white;
   padding: 1rem;
   border-radius: 12px;

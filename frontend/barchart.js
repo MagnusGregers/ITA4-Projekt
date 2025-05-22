@@ -1,5 +1,5 @@
 //width, height, and padding for the graph. Padding ensures the axis does not overlap
-const w = 700;
+const w = 1500;
 const h = 500;
 const padding =2;
 const axisPadding = 60;
@@ -73,7 +73,8 @@ function setUp (dataset_carbon_cap, isCountry) {
 
 
 //defining the colors for the barchart
-const colors = ["#CCDBDC", "#80CED7", "#004643", "#63C7B2", "#485696"];
+const colors = ["#F3D58D", "#F3D58D", "#E59D2C", "#F99256", "#C74E51"];
+
 
 //for each bar the fucktion getcolor is udes to mach the color with a value (high numers = light colors) dark colors = high values.
 function getColor(value, maxValue) {
