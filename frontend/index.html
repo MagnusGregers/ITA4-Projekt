@@ -10,6 +10,7 @@
 <body>
 <!--Forside -->
     <h1>Carbon, Capital and Climate</h1>
+    <p id="subheading">"Every day, millions of goods travel across the globe – but what does that really mean for the environment? On this website, you can explore data on CO₂ emissions from ships, planes, trains, and trucks, and see how our choices affect the climate. Through interactive visualizations and concrete examples, you’ll learn more about how global trade and sustainability are connected."</p>
 <section id="waves" class="section visible">
     <svg id="waveScene" class="bottom-animation" width="100%" height="200"></svg>
 </section>
@@ -46,8 +47,7 @@ Flying between countries and giant ships crossing oceans – those are counted e
 
 <!--animation-->        
 <section id="sky" class="section hidden">
-    <h2>Plane transition</h2>
-        <svg id="skyScene" class="bottom-animation" width="100%" height="200">
+        <svg id="skyScene" width="100%" height="200">
             <g id="cloudGroup"></g>
             <g id="planeGroup">
             <image id="plane"
@@ -68,6 +68,9 @@ Flying between countries and giant ships crossing oceans – those are counted e
 <!--Memorygame-->
 <section id="memorygame">
     <h4>Memory game</h4>
+    <p id="memorygametext">This memory game helps you learn about how much carbon dioxide (CO₂) different types of transport release into the air. CO₂ is a gas that causes climate change, and the more we emit, the more we harm the planet.
+        In the game, you will see cards with transport types like cars, buses, and planes. You’ll also see cards with numbers that show how much CO₂ each one produces for every kilometer it travels. Your goal is to match the transport to the correct CO₂ number. Some transport methods are cleaner, and some pollute more. This game will help you see which ones are better for the environment.
+        Have fun learning while you play!</p>
     <script src="memory-game.js" defer></script>
   <div id="memory-game" class="memory-game">
     <link rel="stylesheet" href="memory-game.css">
