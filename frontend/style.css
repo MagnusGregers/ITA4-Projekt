@@ -48,14 +48,14 @@ h1 {
   margin: 0 auto;
 }
 .country {
-    fill: rgb(233, 140, 26);
-    color: rgb(227, 171, 104);
+    fill: rgb(218, 233, 55);
+    color: rgb(218, 231, 65);
     stroke:#297045;
     
   
 }
 .country:hover {
-    fill: rgb(243, 182, 112);
+    fill: rgb(231, 255, 123);
     cursor: pointer;
 }
 
@@ -63,3 +63,13 @@ h1 {
   display: none;
 }
 
+#selectYear {
+   position: relative;
+    top: 50px;
+    left: 1000px;
+    margin-bottom: 1px;
+    z-index: 10;
+    background: white;
+    border-radius: 5px;
+    padding:5px;
+}
