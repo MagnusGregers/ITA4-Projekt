@@ -1,7 +1,5 @@
 /* styling */
 body {
-    background-color: #297045;
-    color: white;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     margin: 0;
     padding: 20px;
@@ -71,3 +69,26 @@ rect:hover {
   z-index: 1000;
   white-space: nowrap;
   color: #000; /* insures the texts is not white*/}
+
+.box-row {
+  display: flex;
+  flex-wrap: wrap;            /* Så de hopper ned på mobil */
+  gap: 1rem;                  /* Mellemrum mellem bokse */
+  justify-content: center;   /* Centrer boksene horisontalt */
+  margin-top: 2rem;
+}
+
+.text-box {
+  flex: 1 1 250px;            /* Vokser, men aldrig under 250px */
+  max-width: 300px;           /* Så de ikke bliver for brede */
+  background-color: #2a2a2a;
+  color: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.text-box:hover {
+  transform: scale(1.03);
+}
