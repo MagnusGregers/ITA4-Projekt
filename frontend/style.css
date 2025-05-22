@@ -16,6 +16,9 @@ h1 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: white;
     font-size: 40px;
+    margin: 40px auto;
+    max-width: 500px;
+    line-height: 1,5;
 }
 
 .section {
