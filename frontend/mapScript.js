@@ -33,8 +33,8 @@ const dataBox = d3.select('#dataBox')
 
   //fun fact box 
 fun_fact.append('rect')
-.attr('width', 300)
-.attr('height', 80)
+.attr('width', 400)
+.attr('height', 90)
 .style('fill', 'white')
 .style('stroke', '#ccc')
 .style('border', '1px solid black')
@@ -42,21 +42,36 @@ fun_fact.append('rect')
 .attr('ry','10');
 
 //fun fact box text
-fun_fact.append('text')
+const text = fun_fact.append('text')
 .attr('x', '10')
 .attr('y', '20')
 .style('font-family', 'sans-serif')
 .style('font-size', '14px')
-.style('fill', '#333')
-.text('Insert fun fact here');  
+.style('fill', '#333');
 
-fun_fact.append('text')
-.attr('x', '10')
-.attr('y', '40')
-.style('font-family', 'sans-serif')
-.style('font-size', '14px')
-.style('fill', '#333')
-.text('Or here i dont care');
+text.append('tspan')
+  .text("Map of the world's Co2 emission per capita from each country,")
+  .attr('x', 10)
+  .attr('dy', 0); 
+
+  text.append('tspan')
+  .text("showing emission from the years 1990-2021")
+  .attr('x', 10)
+  .attr('dy', '1.2em');  
+
+  text.append('tspan')
+  .text("Click the dropdown to toggle between the years →")
+  .attr('x', 10)
+  .attr('dy', '1.7em')
+  .style('font-weight','bold'); 
+
+  text.append('tspan')
+  .text("Then hover your cursor above a country to see emission!")
+  .attr('x', 10)
+  .attr('dy', '1.2em')
+  .style('font-weight','bold'); 
+   
+
 
 // Projection for drawing a Mercator map
 const projection = d3.geoMercator()
@@ -136,7 +151,7 @@ function loadMap() {
         let dataBoxText = `<strong>Country:</strong> ${name}`;
         if (co2_pr_capital_emissions !== null && co2_pr_capital_emissions !== undefined) {
           dataBoxText += `<br><strong>Year:</strong> ${selectedYear}`;
-          dataBoxText += `<br><strong>CO₂ per capita:</strong> ${co2_pr_capital_emissions}t`;
+          dataBoxText += `<br><strong>Co2 per capita:</strong> ${co2_pr_capital_emissions}t`;
         } else {
           dataBoxText += `<br><em>No data available</em>`;
           }
