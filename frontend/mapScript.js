@@ -1,3 +1,4 @@
+
 console.log('script is running')
 
 // Dimensions for map
@@ -88,7 +89,8 @@ const nameCorrection = {
 };
 
 //Fetching data from our database through an API
-d3.json('http://localhost:3000/api/carbonCap').then(carbonCap => {
+fetch('/api/carbonCap').then(res => res.json())
+.then(carbonCap => {
   carbonCap.forEach(entry => {
     if (!countryInfo[entry.year]) {
       countryInfo[entry.year] = {};
@@ -126,8 +128,7 @@ function loadMap() {
       .append('path')
       .attr('class', 'country')
       .attr('d', path)
-      // Interactive element. When hovering over a country (mouseover) drawn by the CDN data
-      // it displays data from the API,
+      // Interactive element. When hovering over a country (mouseover) drawn by the CDN data, it displays data from the API,
       .on('mouseover', (event, d) => {
         const name = d.properties.name; //Names from the geojson data
         const lookupName = nameCorrection[name] || name; //Calls for the 
