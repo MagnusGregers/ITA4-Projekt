@@ -72,12 +72,17 @@ h1 {
   display: none;
 }
 
-.memorygametext {
+#memorygametext {
     text-align: right;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: white;
+    font-size: 16px;
+    margin: 60px auto;
+    max-width: 600px;
+    line-height: 1,5;
+}    
 
-}#selectYear {
+#selectYear {
    position: relative;
     top: 50px;
     left: 1000px;
