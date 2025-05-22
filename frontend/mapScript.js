@@ -12,6 +12,11 @@ const svgMap = d3.select('#canvas')
   .style('border', '3px solid black')
   .style('border-radius', '25px');
 
+  //fun fact box group element 
+const fun_fact = svgMap.append('g')
+.attr('class', 'fun_fact')
+.attr('transform','translate(10, 10)');
+
 // Display for data when hovering above a country with some style 
 const dataBox = d3.select('#dataBox')
   .style('position', 'absolute')
@@ -25,6 +30,33 @@ const dataBox = d3.select('#dataBox')
   .style('font-size', '14px')
   .style('visibility', 'hidden')
   .style('color', '#000');
+
+  //fun fact box 
+fun_fact.append('rect')
+.attr('width', 300)
+.attr('height', 80)
+.style('fill', 'white')
+.style('stroke', '#ccc')
+.style('border', '1px solid black')
+.attr('rx', '10')
+.attr('ry','10');
+
+//fun fact box text
+fun_fact.append('text')
+.attr('x', '10')
+.attr('y', '20')
+.style('font-family', 'sans-serif')
+.style('font-size', '14px')
+.style('fill', '#333')
+.text('Insert fun fact here');  
+
+fun_fact.append('text')
+.attr('x', '10')
+.attr('y', '40')
+.style('font-family', 'sans-serif')
+.style('font-size', '14px')
+.style('fill', '#333')
+.text('Or here i dont care');
 
 // Projection for drawing a Mercator map
 const projection = d3.geoMercator()
