@@ -25,6 +25,6 @@
   }
   .ship-image {
     width: 1000px;
-    position: absolute; top: 330px; left: 40%; 
+    position: absolute; top: 320px; left: 50%; 
     transform: translateX(-50%);
 }
