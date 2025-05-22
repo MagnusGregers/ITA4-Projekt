@@ -10,7 +10,6 @@ const svgMap = d3.select('#canvas')
   .append('svg')
   .attr('width', widthMap)
   .attr('height', heightMap)
-  .style('border', '3px solid black')
   .style('border-radius', '25px');
 
   //fun fact box group element 

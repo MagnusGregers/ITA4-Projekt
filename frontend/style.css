@@ -1,5 +1,5 @@
 body {
-    background-color: #2B7A78;
+    background-color: #2B7A78 !important;
     color: white;
     height: 2000px;
     margin: 0;
@@ -22,6 +22,9 @@ h1 {
     opacity: 0;
     pointer-events: none;
     transition: opacity 1s ease;
+  }
+  #sky {
+    height:200px;
   }
   
   .section.visible {
@@ -67,7 +70,7 @@ h1 {
     text-align: right;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: white;
-    
+
 }#selectYear {
    position: relative;
     top: 50px;
