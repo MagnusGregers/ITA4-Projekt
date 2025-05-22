@@ -13,7 +13,40 @@
 <section id="waves" class="section visible">
     <svg id="waveScene" class="bottom-animation" width="100%" height="200"></svg>
 </section>
-<!--graph -->          
+<!--graph --> 
+    <section id="graph-section">
+        <h2>Graph</h2>
+<h3>CO₂ from Transport – What’s the Deal?</h3>
+<p>Ever wondered how much pollution our cars, buses, trains, and planes pump into the air? 
+This page from Our World in Data breaks it down – per person, per country.</p>
+
+<h3>So, what’s CO₂ from transport?</h3>
+<p>It’s the carbon dioxide (CO₂) released when we travel. Scientists measure how much each person "contributes" by dividing a country’s transport emissions by its population. 
+    Spoiler: some countries are way worse than others!
+Flying between countries and giant ships crossing oceans – those are counted elsewhere.</p>
+
+<h3>Why the big difference?</h3>
+<p>Some places love cars and long road trips (hello, high emissions). Others rock public transport and clean energy – way better for the planet.
+</p>
+
+<h3>Then why should we care?</h3>
+<p>Because knowing who pollutes and how helps us find smarter, greener ways to get around – like biking, taking the bus, or going electric</p>
+
+<h3>Press the button to sort</h3>
+        <div>
+            <button id="sortByemission">Emission</button>
+            <button id="sortByarea_km">Area km2</button>
+            <button id="sortByCountry">Country</button>
+        </div>
+    <div id="tooltip"></div>
+    </section>
+    
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="barchart.js"></script>
+
+<!--animation-->
+<section id="sky" class="section visible">
+    <h2 bold>Plane transition</h2>         
 <section id="sky" class="section hidden">
     <h2>Plane transition</h2>
         <svg id="skyScene" class="bottom-animation" width="100%" height="200">
@@ -26,11 +59,7 @@
         </svg>
 </section>
 <!--Worldmap-->
-<section id="worldmap" class="section visible">
-        <svg id="" class="bottom-animation" width="100%" height="200">
-        </svg>
-        </section>
-        <select id="selectYear"></select>
+    <select id="selectYear"></select>
     <div id="canvas"></div>
     <div id="dataBox"></div>
 
@@ -39,40 +68,15 @@
     <script src="mapScript.js"></script>
 
 <!--Memorygame-->
-<section id="memorygame" class="section visible">
+<section id="memorygame">
     <h4>Memory game</h4>
     <script src="memory-game.js" defer></script>
   <div id="memory-game" class="memory-game">
     <link rel="stylesheet" href="memory-game.css">
   </div>
 </section>
-<!--graph HTML-->
-    <section id="graph-section">
-        <h2>Graph</h2>
-<h3>CO₂ from Transport – What’s the Deal?</h3>
-<p>Ever wondered how much pollution our cars, buses, trains, and planes pump into the air? 
-This page from Our World in Data breaks it down – per person, per country.</p>
 
-<h3>So, what’s CO₂ from transport?</h3>
-<p>It’s the carbon dioxide (CO₂) released when we travel. Scientists measure how much each person "contributes" by dividing a country’s transport emissions by its population. 
-    Spoiler: some countries are way worse than others!</p>
 
-<h3>Why the big difference?</h3>
-<p>Some places love cars and long road trips (hello, high emissions). Others rock public transport and clean energy – way better for the planet.</p>
-
-<h3>Press the button to sort</h3>
-        <div>
-            <button id="sortByemission">Emission</button>
-            <button id="sortByarea_km">Area km2</button>
-            <button id="sortByCountry">Country</button>
-        </div>
-    <div id="tooltip"></div>
-    </section>
-    
-    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-    <script src="script.js"></script>
-    <script src="barchart.js"></script>
-
-   
+   <script src="script.js"></script>
 </body>
 </html> 
