@@ -24,7 +24,7 @@
     z-index: 1;
   }
   .ship-image {
-    width: 1400px;
-    position: absolute; top: 230px; left: 50%; 
+    width: 1000px;
+    position: absolute; top: 330px; left: 40%; 
     transform: translateX(-50%);
 }
