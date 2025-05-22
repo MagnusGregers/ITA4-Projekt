@@ -63,3 +63,8 @@ h1 {
   display: none;
 }
 
+.memorygametext {
+    text-align: right;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+}
