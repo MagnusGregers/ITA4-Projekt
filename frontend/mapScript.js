@@ -35,7 +35,7 @@ const dataBox = d3.select('#dataBox')
 fun_fact.append('rect')
 .attr('width', 400)
 .attr('height', 90)
-.style('fill', 'white')
+.style('fill', '#E59D2C')
 .style('stroke', '#ccc')
 .style('border', '1px solid black')
 .attr('rx', '10')
@@ -47,7 +47,7 @@ const text = fun_fact.append('text')
 .attr('y', '20')
 .style('font-family', 'sans-serif')
 .style('font-size', '14px')
-.style('fill', '#333');
+.style('fill', 'white');
 
 text.append('tspan')
   .text("Map of the world's Co2 emission per capita from each country,")
