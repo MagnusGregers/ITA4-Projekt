@@ -60,7 +60,7 @@ text.append('tspan')
   .attr('dy', '1.2em');  
 
   text.append('tspan')
-  .text("Click the dropdown to toggle between the years →")
+  .text("Click the dropdown to toggle between the years")
   .attr('x', 10)
   .attr('dy', '1.7em')
   .style('font-weight','bold'); 
@@ -145,7 +145,7 @@ function loadMap() {
       // Interactive element. When hovering over a country (mouseover) drawn by the CDN data, it displays data from the API,
       .on('mouseover', (event, d) => {
         const name = d.properties.name; //Names from the geojson data
-        const lookupName = nameCorrection[name] || name; //Calls for the 
+        const lookupName = nameCorrection[name] || name; //Calls for the name correction to either use the corrected name if listed or the default name form the dataset
         const co2_pr_capital_emissions = countryInfo[selectedYear] ? countryInfo[selectedYear][lookupName] : null;
 
         let dataBoxText = `<strong>Country:</strong> ${name}`;
