@@ -55,7 +55,7 @@
 
 /* Back page design */
 .card-back-style {
-  background: linear-gradient(to bottom right, #485695, #80dec7);
+  background: #f99256;
   color: white;
   font-weight: bold;
   align-items: center;
