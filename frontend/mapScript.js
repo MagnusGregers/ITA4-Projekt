@@ -146,6 +146,7 @@ function loadMap() {
       .on('mouseover', (event, d) => {
         const name = d.properties.name; //Names from the geojson data
         const lookupName = nameCorrection[name] || name; //Calls for the name correction to either use the corrected name if listed or the default name form the dataset
+        // If The cata for countryinfo[selectYear] exists, use that, otherwise set result to null.
         const co2_pr_capital_emissions = countryInfo[selectedYear] ? countryInfo[selectedYear][lookupName] : null;
 
         let dataBoxText = `<strong>Country:</strong> ${name}`;
