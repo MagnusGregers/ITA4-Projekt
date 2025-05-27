@@ -35,7 +35,7 @@ const dataBox = d3.select('#dataBox')
 fun_fact.append('rect')
 .attr('width', 400)
 .attr('height', 90)
-.style('fill', 'white')
+.style('fill', '#E59D2C')
 .style('stroke', '#ccc')
 .style('border', '1px solid black')
 .attr('rx', '10')
@@ -47,7 +47,7 @@ const text = fun_fact.append('text')
 .attr('y', '20')
 .style('font-family', 'sans-serif')
 .style('font-size', '14px')
-.style('fill', '#333');
+.style('fill', 'white');
 
 text.append('tspan')
   .text("Map of the world's Co2 emission per capita from each country,")
@@ -60,7 +60,7 @@ text.append('tspan')
   .attr('dy', '1.2em');  
 
   text.append('tspan')
-  .text("Click the dropdown to toggle between the years →")
+  .text("Click the dropdown to toggle between the years")
   .attr('x', 10)
   .attr('dy', '1.7em')
   .style('font-weight','bold'); 
@@ -145,25 +145,31 @@ function loadMap() {
       // Interactive element. When hovering over a country (mouseover) drawn by the CDN data, it displays data from the API,
       .on('mouseover', (event, d) => {
         const name = d.properties.name; //Names from the geojson data
-        const lookupName = nameCorrection[name] || name; //Calls for the 
+        const lookupName = nameCorrection[name] || name; //Calls for the name correction to either use the corrected name if listed or the default name form the dataset
+        // If The cata for countryinfo[selectYear] exists, use that, otherwise set result to null.
         const co2_pr_capital_emissions = countryInfo[selectedYear] ? countryInfo[selectedYear][lookupName] : null;
 
-        let dataBoxText = `<strong>Country:</strong> ${name}`;
+        let dataBoxText = `<strong>Country:</strong> ${name}`;//Makes a var called dataBoxText that prints "country:" in bold and the imports the country name from the database
+        
+        //If statement, saying: if co2 emission is NOT null and NOT undefined, then print year an emissions with data. 
         if (co2_pr_capital_emissions !== null && co2_pr_capital_emissions !== undefined) {
           dataBoxText += `<br><strong>Year:</strong> ${selectedYear}`;
           dataBoxText += `<br><strong>Co2 per capita:</strong> ${co2_pr_capital_emissions}t`;
+
+          //If else, (dataBoxText being null or undefined) print "no data available" in bold
         } else {
           dataBoxText += `<br><em>No data available</em>`;
           }
 
+          //Box that displays the data being handled in the code above. Adds a box that is slighty below and to the right of the cursor.
           dataBox
             .style('top', (event.pageY + 10) + 'px')
             .style('left', (event.pageX + 10) + 'px')
-            .style('visibility', 'visible')
-            .html(dataBoxText);
+            .style('visibility', 'visible')//On mouseover the visibility of the box is "visible"
+            .html(dataBoxText);//Adds the dynamic HTML content to the box.
         })
         .on('mouseout', () => {
-          dataBox.style('visibility', 'hidden');
+          dataBox.style('visibility', 'hidden');//Changes visibility to hidden. Hiding the box again.
         });
     });
 }

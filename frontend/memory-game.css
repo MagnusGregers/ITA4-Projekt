@@ -1,3 +1,4 @@
+/* Container for the whole game */
 .memory-game {
   display: grid;
   grid-template-columns: repeat(3, 100px);
@@ -6,6 +7,7 @@
   margin-top: 40px;
 }
 
+/* Each card */
 .memory-card {
   width: 100px;
   height: 140px;
@@ -13,6 +15,7 @@
   cursor: pointer;
 }
 
+/* The inner element which is turned */
 .card-inner {
   width: 100%;
   height: 100%;
@@ -21,10 +24,12 @@
   position: relative;
 }
 
+/* When a card is flipped */
 .memory-card.flipped .card-inner {
   transform: rotateY(180deg);
 }
 
+/* Both front and back of the card */
 .card-front,
 .card-back {
   position: absolute;
@@ -34,6 +39,7 @@
   border-radius: 10px;
 }
 
+/* Standard layout for the content of the card */
 .card-face {
   width: 100%;
   height: 100%;
@@ -41,13 +47,15 @@
   display: flex;
 }
 
+/* Front page is shown after flip (rotated 180 degres) */
 .card-front {
   transform: rotateY(180deg);
   overflow: hidden;
 }
 
+/* Back page design */
 .card-back-style {
-  background: linear-gradient(to bottom right, #485695, #80dec7);
+  background: #f99256;
   color: white;
   font-weight: bold;
   align-items: center;
@@ -55,6 +63,7 @@
   border-style: dashed;
 }
 
+/* Front page design, shows text or image */
 .card-front-style {
   background: white;
   color: black;
