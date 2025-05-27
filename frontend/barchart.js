@@ -25,6 +25,7 @@ fetch('/api/top20')
 //adding svg elements to the body
 const svg = d3.select("body").append("svg").attr("width", w).attr("height", h);
 
+//declaring the axis to be used later.
 let yScale = null;
 let xScale = null;
 let xAxis = null;
@@ -34,36 +35,38 @@ let yAxis = null;
 InitializeGraph(dataset_carbon_cap, true);
 
 
-//sorting buttons
+//sorting buttons nad adding click event listeners to sorting buttons
 d3.selectAll("#sortByemission, #sortByarea_km, #sortByCountry").on(
   "click",
   function (e) {
 //tracks witch button is pressed
+// Get the ID of the clicked button to determine sort type
 let id = e.target.id;
-console.log(id);
+console.log(id); //logging which one is pressed
 let isCountry = false;
 if (id === "sortByCountry") {
-    isCountry = true;
+    isCountry = true; // Mark true if sorting (used for axis label logic)
 }
-//sorting the data, when done the soring is logged
+//sorting the data, when done the sorting is logged based on the button pressed
 sortData(id);
  console.log("Sorted data by " + id + " : ", dataset_carbon_cap);
 
- //sorting animation
+ //sorting animation to reflect the chosen data 
  animateData(dataset_carbon_cap, isCountry);
   }
 );
 
 function InitializeGraph(dataset_carbon_cap, isCountry) {
-//the function calls supfuctions -  this function is what creates the chart (scales, bars and axis)
+// Step 1: Set up scales and axes based on the dataset and axis label
 setUp(dataset_carbon_cap, isCountry);
+// Step 2: Create the initial bar chart with default bars
 createDefaultChart(dataset_carbon_cap);
-//adding axes with a <g> element
+// Step 3: Add X and Y axes to the SVG
 addAxes ();
 }
 
 function setUp (dataset_carbon_cap, isCountry) {
-  //sets up the graph by creating a linear skala, that converts the values from the dataset tp the y-and x-positions
+  //sets up the graph by creating a linear skala, that converts the values from the dataset to the y-and x-positions
   yScale = createScaleY(dataset_carbon_cap);
   xScale = createScaleX(dataset_carbon_cap);
   //making the actual lines 
@@ -76,7 +79,8 @@ function setUp (dataset_carbon_cap, isCountry) {
 const colors = ["#F3D58D", "#F3D58D", "#E59D2C", "#F99256", "#C74E51"];
 
 
-//for each bar the fucktion getcolor is udes to mach the color with a value (high numers = light colors) dark colors = high values.
+// Function to determine the color of each bar based on the value
+// Higher values get darker colors; lower values get lighter colors
 function getColor(value, maxValue) {
   const ratio = value / maxValue;
   const index = Math.floor(ratio * (colors.length - 1));
@@ -84,7 +88,7 @@ function getColor(value, maxValue) {
 }
 
 function createDefaultChart (dataset_carbon_cap) {
-  // finding the bigest value to add color
+  // finding the highest value to add color scaling
 const maxArea =d3.max(dataset_carbon_cap, d => d[0]);
 //adding a mouseover function
   const tooltip = d3.select("#tooltip");
@@ -93,14 +97,16 @@ const maxArea =d3.max(dataset_carbon_cap, d => d[0]);
 //this is done for d3 to reginize dem and bind the data to the bars
 svg
 .selectAll ("rect")
-.data(dataset_carbon_cap, function (d) {
+.data(dataset_carbon_cap, function (d) { //using country as key
     return d[2];
 })
 .enter()
 .append("rect")
+//set x position based on index and scale
 .attr("x", function (d, i) {
     return xScale (i) + padding;
 })
+//set y position based on emission value
 .attr("y", function (d) {
       return yScale(d[0]);
     })
@@ -112,8 +118,11 @@ svg
       console.log("height: " + (yScale(d[0]) - axisPadding));
       return h - padding - axisPadding - yScale(d[0]);
     })
+    //setting it to fill color depending on emission value
     .attr("fill", d => getColor(d[0], maxArea))
-    //adding a mouseover funktion
+    
+    
+    //adding a mouseover event to show the tooltip with data info
   .on("mouseover", (event, d) => {
     tooltip
       .style("opacity", 1) //makeing it opacique
